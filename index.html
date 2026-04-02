@@ -1210,8 +1210,10 @@
     nav ul { display: none !important; }
     nav { padding: 0.6rem 1rem !important; }
     
-    /* Carousel slides full width */
-    .carousel-slide { flex: 0 0 85vw !important; }
+    /* Carousel */
+    .carousel-track-wrap { width: 100% !important; overflow: hidden !important; }
+    .carousel-slide { flex: 0 0 calc(50% - 0.3rem) !important; min-width: 0 !important; }
+    .hero-carousel { overflow: hidden !important; }
     
     /* Products grid 2 col */
     .products-grid { grid-template-columns: 1fr 1fr !important; gap: 0.8rem !important; }
