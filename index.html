@@ -816,9 +816,12 @@
 
   /* ---- UNIVERSAL POPUP ---- */
   #universalPopup {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    display: none !important; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(0,0,0,0.85); z-index: 9999; overflow-y: auto; padding: 2rem;
     -webkit-overflow-scrolling: touch;
+  }
+  #universalPopup.open {
+    display: block !important;
   }
   .popup-inner {
     max-width: 960px; margin: 0 auto; background: white;
@@ -2992,13 +2995,13 @@ function openPopup(key) {
     var ft = thumbs.querySelector('img');
     if (ft) { ft.style.border='2px solid #5BA55B'; ft.style.opacity='1'; }
   }
-  document.getElementById('universalPopup').style.display = 'block';
+  document.getElementById('universalPopup').classList.add('open');
   document.body.style.overflow = 'hidden';
   loadPopupReviews(key);
 }
 
 function closePopup() {
-  document.getElementById('universalPopup').style.display = 'none';
+  document.getElementById('universalPopup').classList.remove('open');
   document.body.style.overflow = 'auto';
 }
 
