@@ -2293,7 +2293,7 @@
 <div class="cart-overlay" id="cartOverlay" style="display:none;" onclick="closeCart()"></div>
 
 <!-- CART DRAWER -->
-<div class="cart-drawer" id="cartDrawer" style="right:-480px;">
+<div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <h3>🛒 Tu carrito</h3>
     <button class="cart-close" onclick="closeCart()">✕</button>
@@ -2996,14 +2996,18 @@ function closeOrder() {
 var cart = [];
 
 function openCart() {
-  document.getElementById('cartOverlay').classList.add('open');
+  var co = document.getElementById('cartOverlay');
+  co.style.display = 'block';
+  co.classList.add('open');
   document.getElementById('cartDrawer').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderCart();
 }
 
 function closeCart() {
-  document.getElementById('cartOverlay').classList.remove('open');
+  var co = document.getElementById('cartOverlay');
+  co.style.display = 'none';
+  co.classList.remove('open');
   document.getElementById('cartDrawer').classList.remove('open');
   document.body.style.overflow = '';
 }
