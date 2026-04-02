@@ -1333,6 +1333,13 @@
     padding: 1rem !important;
     gap: 1rem !important;
   }
+  .before-after-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .before-after-grid > div img {
+    max-height: 220px !important;
+  }
   /* Green guarantee section */
   .guarantee-grid, [style*="grid-template-columns:repeat(4"] {
     grid-template-columns: 1fr 1fr !important;
@@ -1991,7 +1998,7 @@
       <h2 style="font-family:'Lora',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--bark);">Antes y <em style="color:var(--green);">después</em></h2>
       <p style="font-size:0.92rem;color:var(--muted);max-width:50ch;margin:0.8rem auto 0;">Mira la diferencia que hacen nuestros gadgets en el pelaje de tu mascota</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;" class="before-after-grid">
 
       <div style="background:var(--cream);overflow:hidden;">
         <div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream);">
