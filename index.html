@@ -2293,7 +2293,7 @@
 <div class="cart-overlay" id="cartOverlay" style="display:none;" onclick="closeCart()"></div>
 
 <!-- CART DRAWER -->
-<div class="cart-drawer" id="cartDrawer">
+<div class="cart-drawer" id="cartDrawer" style="display:none;">
   <div class="cart-header">
     <h3>🛒 Tu carrito</h3>
     <button class="cart-close" onclick="closeCart()">✕</button>
@@ -2999,7 +2999,9 @@ function openCart() {
   var co = document.getElementById('cartOverlay');
   co.style.display = 'block';
   co.classList.add('open');
-  document.getElementById('cartDrawer').classList.add('open');
+  var cd = document.getElementById('cartDrawer');
+  cd.style.display = 'flex';
+  cd.classList.add('open');
   document.body.style.overflow = 'hidden';
   renderCart();
 }
@@ -3008,7 +3010,9 @@ function closeCart() {
   var co = document.getElementById('cartOverlay');
   co.style.display = 'none';
   co.classList.remove('open');
-  document.getElementById('cartDrawer').classList.remove('open');
+  var cd = document.getElementById('cartDrawer');
+  cd.style.display = 'none';
+  cd.classList.remove('open');
   document.body.style.overflow = '';
 }
 
