@@ -1228,6 +1228,7 @@
       overflow-y: auto !important;
       display: flex !important;
       align-items: flex-start !important;
+      background: rgba(0,0,0,0.92) !important;
     }
     .popup-inner {
       display: flex !important;
@@ -1236,18 +1237,23 @@
       max-height: none !important;
       overflow: visible !important;
       min-height: auto !important;
+      margin-top: 2rem !important;
     }
     .popup-media {
       width: 100% !important;
-      padding: 1rem !important;
+      padding: 0.8rem !important;
       height: auto !important;
       overflow: visible !important;
       flex-shrink: 0 !important;
     }
     #popupMediaWrap {
       width: 100% !important;
-      height: 280px !important;
+      height: 200px !important;
       aspect-ratio: unset !important;
+    }
+    #popupThumbs img {
+      width: 44px !important;
+      height: 44px !important;
     }
     #popupThumbs {
       flex-wrap: nowrap !important;
@@ -1261,9 +1267,30 @@
       height: auto !important;
       display: flex !important;
       flex-direction: column !important;
-      gap: 0.8rem !important;
+      gap: 0.6rem !important;
+      font-size: 0.85rem !important;
     }
-    .popup-close { font-size: 1.5rem; }
+    .popup-info h2 { font-size: 1.1rem !important; }
+    .popup-info p { font-size: 0.8rem !important; line-height: 1.5 !important; }
+    .popup-info ul { font-size: 0.78rem !important; }
+    .popup-close { 
+      font-size: 1.5rem;
+      position: fixed !important;
+      top: 0.5rem !important;
+      right: 0.8rem !important;
+      z-index: 99999 !important;
+      background: rgba(0,0,0,0.6) !important;
+      color: white !important;
+      width: 32px !important;
+      height: 32px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 50% !important;
+    }
+    /* Fix viewers bar overlap */
+    #popupViewers { font-size: 0.65rem !important; }
+    #popupStockBar { font-size: 0.72rem !important; padding: 0.4rem 0.6rem !important; }
 
     /* BEFORE/AFTER */
     .proof-grid { grid-template-columns: 1fr; }
