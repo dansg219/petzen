@@ -1328,6 +1328,20 @@
   .cart-drawer { max-width: 100% !important; }
   .newsletter { flex-direction: column !important; padding: 2rem 1rem !important; }
   .review-form-box { padding: 1.5rem 1rem !important; }
+  .guarantee-grid {
+    grid-template-columns: 1fr 1fr !important;
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+  /* Green guarantee section */
+  .guarantee-grid, [style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  div[style*="repeat(4,1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+    padding: 1.5rem 1rem !important;
+  }
 }
 </style>
 
@@ -1681,7 +1695,7 @@
 
 <!-- GARANTÍA VISIBLE -->
 <div style="background:#1A2E1A;padding:1.5rem 5rem;">
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;" class="guarantee-grid">
     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
       <span style="font-size:1.8rem;">🛡️</span>
       <div style="font-size:0.82rem;font-weight:700;color:#F0F5EE;">Garantía 15 días</div>
