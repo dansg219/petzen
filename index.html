@@ -2213,7 +2213,7 @@
 </footer>
 
 <!-- UNIVERSAL POPUP -->
-<div id="universalPopup">
+<div id="universalPopup" style="display:none;">
   <div class="popup-inner">
     <div class="popup-media">
       <div id="popupMediaWrap"></div>
@@ -2958,13 +2958,17 @@ function openPopup(key) {
     var ft = thumbs.querySelector('img');
     if (ft) { ft.style.border='2px solid #5BA55B'; ft.style.opacity='1'; }
   }
-  document.getElementById('universalPopup').classList.add('open');
+  var up = document.getElementById('universalPopup');
+  up.style.display = 'block';
+  up.classList.add('open');
   document.body.style.overflow = 'hidden';
   loadPopupReviews(key);
 }
 
 function closePopup() {
-  document.getElementById('universalPopup').classList.remove('open');
+  var up = document.getElementById('universalPopup');
+  up.style.display = 'none';
+  up.classList.remove('open');
   document.body.style.overflow = 'auto';
 }
 
