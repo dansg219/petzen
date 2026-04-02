@@ -1222,20 +1222,46 @@
     .carousel-controls { gap: 0.5rem; }
 
     /* POPUP */
-    #universalPopup { padding: 0.5rem; overflow-y: auto; }
-    .popup-inner { 
-      grid-template-columns: 1fr !important; 
-      min-height: auto;
-      width: 100%;
+    #universalPopup {
+      padding: 0 !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      display: flex !important;
+      align-items: flex-start !important;
     }
-    .popup-media { padding: 1rem; height: auto; overflow-y: visible; }
-    #popupMediaWrap { aspect-ratio: 1/1; height: auto; }
-    #popupThumbs { flex-wrap: nowrap; overflow-x: auto; }
-    .popup-info { 
-      padding: 1rem !important; 
-      overflow-y: visible !important;
+    .popup-inner {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      max-height: none !important;
+      overflow: visible !important;
+      min-height: auto !important;
+    }
+    .popup-media {
+      width: 100% !important;
+      padding: 1rem !important;
+      height: auto !important;
+      overflow: visible !important;
+      flex-shrink: 0 !important;
+    }
+    #popupMediaWrap {
+      width: 100% !important;
+      height: 280px !important;
+      aspect-ratio: unset !important;
+    }
+    #popupThumbs {
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+    }
+    .popup-info {
+      width: 100% !important;
+      padding: 1rem !important;
+      overflow: visible !important;
       max-height: none !important;
       height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.8rem !important;
     }
     .popup-close { font-size: 1.5rem; }
 
