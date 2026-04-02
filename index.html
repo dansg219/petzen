@@ -1225,50 +1225,13 @@
     .carousel-controls { gap: 0.5rem; }
 
     /* POPUP MOBILE */
-    #universalPopup {
-      padding: 0.5rem !important;
-      overflow-y: auto !important;
-    }
     .popup-inner {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      max-height: none !important;
-      overflow: visible !important;
-      font-size: 11px !important;
+      grid-template-columns: 1fr 1fr;
+      font-size: 11px;
     }
-    .popup-media {
-      padding: 0.8rem !important;
-      overflow-y: visible !important;
-      height: auto !important;
-    }
-    #popupMediaWrap {
-      height: 180px !important;
-      aspect-ratio: unset !important;
-    }
-    #popupThumbs img { width: 40px !important; height: 40px !important; }
-    .popup-info {
-      padding: 0.8rem !important;
-      overflow-y: visible !important;
-      max-height: none !important;
-      height: auto !important;
-      gap: 0.4rem !important;
-    }
-    .popup-close {
-      position: fixed !important;
-      top: 0.8rem !important;
-      right: 0.8rem !important;
-      z-index: 99999 !important;
-      background: rgba(0,0,0,0.7) !important;
-      color: white !important;
-      border-radius: 50% !important;
-      width: 32px !important;
-      height: 32px !important;
-      font-size: 1rem !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      border: none !important;
-    }
+    #popupMediaWrap { height: 180px; aspect-ratio: unset; }
+    #popupThumbs img { width: 40px; height: 40px; }
+    .popup-info { padding: 0.8rem; gap: 0.4rem; }
 
     /* BEFORE/AFTER */
     .proof-grid { grid-template-columns: 1fr; }
