@@ -1225,15 +1225,13 @@
     .carousel-controls { gap: 0.5rem; }
 
     /* POPUP MOBILE */
-    #universalPopup { padding: 0.5rem; }
     .popup-inner {
       grid-template-columns: 1fr 1fr;
-      font-size: 12px;
-      min-height: auto;
+      font-size: 11px;
     }
-    #popupMediaWrap { height: 45vw; aspect-ratio: unset; }
-    #popupThumbs img { width: 36px; height: 36px; }
-    .popup-info { padding: 0.6rem; gap: 0.4rem; overflow-y: auto; }
+    #popupMediaWrap { height: 180px; aspect-ratio: unset; }
+    #popupThumbs img { width: 40px; height: 40px; }
+    .popup-info { padding: 0.8rem; gap: 0.4rem; }
 
     /* BEFORE/AFTER */
     .proof-grid { grid-template-columns: 1fr; }
@@ -2295,7 +2293,7 @@
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 
 <!-- CART DRAWER -->
-<div class="cart-drawer" id="cartDrawer" style="display:none;">
+<div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <h3>🛒 Tu carrito</h3>
     <button class="cart-close" onclick="closeCart()">✕</button>
@@ -2326,7 +2324,7 @@
 </div>
 
 <!-- ORDER FORM OVERLAY -->
-<div class="order-overlay" id="orderOverlay" style="display:none;">
+<div class="order-overlay" id="orderOverlay">
   <div class="order-box">
     <button class="order-close" onclick="closeOrder()">✕</button>
 
@@ -2979,18 +2977,14 @@ function openOrder(productName, productPrice) {
   document.getElementById('orderProductPrice').textContent = productPrice;
   document.getElementById('formProducto').value = productName;
   document.getElementById('formPrecio').value = productPrice;
-  var ov = document.getElementById('orderOverlay');
-  ov.style.display = 'flex';
-  ov.classList.add('show');
+  document.getElementById('orderOverlay').classList.add('show');
   document.body.style.overflow = 'hidden';
   document.getElementById('orderForm').style.display = 'block';
   document.getElementById('orderSuccess').style.display = 'none';
 }
 
 function closeOrder() {
-  var ov = document.getElementById('orderOverlay');
-  ov.style.display = 'none';
-  ov.classList.remove('show');
+  document.getElementById('orderOverlay').classList.remove('show');
   document.body.style.overflow = 'auto';
   document.getElementById('petzenForm').reset();
 }
