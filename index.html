@@ -2010,7 +2010,7 @@
 </section>
 
 <!-- REVIEW FORM OVERLAY -->
-<div class="review-form-overlay" id="reviewFormOverlay" onclick="if(event.target===this)closeReviewForm()">
+<div class="review-form-overlay" id="reviewFormOverlay" style="display:none;" onclick="if(event.target===this)closeReviewForm()">
   <div class="review-form-box">
     <button onclick="closeReviewForm()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888;">✕</button>
     <div class="review-form-title">Escribir reseña</div>
@@ -2324,7 +2324,7 @@
 </div>
 
 <!-- ORDER FORM OVERLAY -->
-<div class="order-overlay" id="orderOverlay">
+<div class="order-overlay" id="orderOverlay" style="display:none;">
   <div class="order-box">
     <button class="order-close" onclick="closeOrder()">✕</button>
 
