@@ -90,7 +90,7 @@
   }
   .cart-overlay.open { display: block; opacity: 1; }
   .cart-drawer {
-    position: fixed; top: 0; right: -100vw; bottom: 0;
+    position: fixed; top: 0; right: -480px; bottom: 0;
     width: 100%; max-width: 460px;
     background: var(--warm-white); z-index: 501;
     display: flex; flex-direction: column;
@@ -1225,13 +1225,15 @@
     .carousel-controls { gap: 0.5rem; }
 
     /* POPUP MOBILE */
+    #universalPopup { padding: 0.5rem; }
     .popup-inner {
       grid-template-columns: 1fr 1fr;
-      font-size: 11px;
+      font-size: 12px;
+      min-height: auto;
     }
-    #popupMediaWrap { height: 180px; aspect-ratio: unset; }
-    #popupThumbs img { width: 40px; height: 40px; }
-    .popup-info { padding: 0.8rem; gap: 0.4rem; }
+    #popupMediaWrap { height: 45vw; aspect-ratio: unset; }
+    #popupThumbs img { width: 36px; height: 36px; }
+    .popup-info { padding: 0.6rem; gap: 0.4rem; overflow-y: auto; }
 
     /* BEFORE/AFTER */
     .proof-grid { grid-template-columns: 1fr; }
@@ -2010,7 +2012,7 @@
 </section>
 
 <!-- REVIEW FORM OVERLAY -->
-<div class="review-form-overlay" id="reviewFormOverlay" style="display:none;" onclick="if(event.target===this)closeReviewForm()">
+<div class="review-form-overlay" id="reviewFormOverlay" onclick="if(event.target===this)closeReviewForm()">
   <div class="review-form-box">
     <button onclick="closeReviewForm()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#888;">✕</button>
     <div class="review-form-title">Escribir reseña</div>
@@ -2077,14 +2079,14 @@
         ¿Qué pasa si el producto no llega o llega dañado?
         <span>+</span>
       </button>
-      <div class="faq-answer">Si tu pedido no llega o llega en mal estado, te enviamos uno nuevo sin costo adicional o te hacemos el reembolso completo. Solo escríbenos a soportepetzen@gmail.com con una foto del problema.</div>
+      <div class="faq-answer">Si tu pedido no llega o llega en mal estado, te enviamos uno nuevo sin costo adicional o te hacemos el reembolso completo. Solo escríbenos a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21524e514e5355445144555b444f61464c40484d0f424e4c">[email&#160;protected]</a> con una foto del problema.</div>
     </div>
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         ¿Es seguro comprar en petZen?
         <span>+</span>
       </button>
-      <div class="faq-answer">Sí. Somos una empresa colombiana con sede en Manizales. Puedes contactarnos en cualquier momento a soportepetzen@gmail.com o por WhatsApp. Todos nuestros pagos son a través de canales verificados y nunca pedimos datos de tarjetas de crédito directamente.</div>
+      <div class="faq-answer">Sí. Somos una empresa colombiana con sede en Manizales. Puedes contactarnos en cualquier momento a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e5968a958a9791809580919f808ba58288848c89cb868a88">[email&#160;protected]</a> o por WhatsApp. Todos nuestros pagos son a través de canales verificados y nunca pedimos datos de tarjetas de crédito directamente.</div>
     </div>
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
@@ -2118,11 +2120,11 @@
           </div>
         </a>
 
-        <a href="mailto:soportepetzen@gmail.com" style="display:flex;align-items:center;gap:1rem;background:white;border:1px solid rgba(26,46,26,0.1);padding:1.2rem 1.5rem;text-decoration:none;transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(26,46,26,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <a href="/cdn-cgi/l/email-protection#d6a5b9a6b9a4a2b3a6b3a2acb3b896b1bbb7bfbaf8b5b9bb" style="display:flex;align-items:center;gap:1rem;background:white;border:1px solid rgba(26,46,26,0.1);padding:1.2rem 1.5rem;text-decoration:none;transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(26,46,26,0.1)'" onmouseout="this.style.boxShadow='none'">
           <span style="font-size:2rem;">✉️</span>
           <div>
             <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);">Email</div>
-            <div style="font-size:1rem;font-weight:700;color:var(--bark);">soportepetzen@gmail.com</div>
+            <div style="font-size:1rem;font-weight:700;color:var(--bark);"><span class="__cf_email__" data-cfemail="6f1c001f001d1b0a1f0a1b150a012f08020e0603410c0002">[email&#160;protected]</span></div>
             <div style="font-size:0.78rem;color:var(--muted);">Respuesta en menos de 24 horas</div>
           </div>
         </a>
@@ -2154,7 +2156,7 @@
           <span style="font-size:1.5rem;flex-shrink:0;">↩️</span>
           <div>
             <div style="font-size:0.85rem;font-weight:700;color:var(--bark);margin-bottom:0.2rem;">No era lo esperado — 15 días</div>
-            <div style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Tienes 15 días desde que recibes tu pedido para reportar cualquier inconveniente. Escríbenos a soportepetzen@gmail.com.</div>
+            <div style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Tienes 15 días desde que recibes tu pedido para reportar cualquier inconveniente. Escríbenos a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9deef2edf2efe9f8edf8e9e7f8f3ddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a>.</div>
           </div>
         </div>
       </div>
@@ -2290,7 +2292,7 @@
 
 
 <!-- CART OVERLAY -->
-<div class="cart-overlay" id="cartOverlay" style="display:none;" onclick="closeCart()"></div>
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 
 <!-- CART DRAWER -->
 <div class="cart-drawer" id="cartDrawer" style="display:none;">
@@ -2428,7 +2430,7 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function imgPath(src) {
   return src;
 }
@@ -2977,14 +2979,18 @@ function openOrder(productName, productPrice) {
   document.getElementById('orderProductPrice').textContent = productPrice;
   document.getElementById('formProducto').value = productName;
   document.getElementById('formPrecio').value = productPrice;
-  document.getElementById('orderOverlay').classList.add('show');
+  var ov = document.getElementById('orderOverlay');
+  ov.style.display = 'flex';
+  ov.classList.add('show');
   document.body.style.overflow = 'hidden';
   document.getElementById('orderForm').style.display = 'block';
   document.getElementById('orderSuccess').style.display = 'none';
 }
 
 function closeOrder() {
-  document.getElementById('orderOverlay').classList.remove('show');
+  var ov = document.getElementById('orderOverlay');
+  ov.style.display = 'none';
+  ov.classList.remove('show');
   document.body.style.overflow = 'auto';
   document.getElementById('petzenForm').reset();
 }
@@ -2996,23 +3002,15 @@ function closeOrder() {
 var cart = [];
 
 function openCart() {
-  var co = document.getElementById('cartOverlay');
-  co.style.display = 'block';
-  co.classList.add('open');
-  var cd = document.getElementById('cartDrawer');
-  cd.style.display = 'flex';
-  cd.classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.getElementById('cartDrawer').classList.add('open');
   document.body.style.overflow = 'hidden';
   renderCart();
 }
 
 function closeCart() {
-  var co = document.getElementById('cartOverlay');
-  co.style.display = 'none';
-  co.classList.remove('open');
-  var cd = document.getElementById('cartDrawer');
-  cd.style.display = 'none';
-  cd.classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.getElementById('cartDrawer').classList.remove('open');
   document.body.style.overflow = '';
 }
 
@@ -3700,7 +3698,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">📦 Seguimiento</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Una vez despachado tu pedido, recibirás el número de seguimiento a través de Mercado Libre para rastrear tu paquete en tiempo real.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">⚠️ Retrasos</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen no se hace responsable por retrasos causados por la empresa de transporte. Si tu pedido supera los tiempos estimados sin entrega, contáctanos a soportepetzen@gmail.com.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen no se hace responsable por retrasos causados por la empresa de transporte. Si tu pedido supera los tiempos estimados sin entrega, contáctanos a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="30435f405f4244554055444a555e70575d51595c1e535f5d">[email&#160;protected]</a>.</p>
   </div>
 
   <div id="legal_returns">
@@ -3716,7 +3714,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <li>Producto que no era lo esperado</li>
     </ul>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">📋 Proceso</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Escríbenos a <strong>soportepetzen@gmail.com</strong> con tu número de pedido y una foto o descripción del problema. Te respondemos en menos de 24 horas.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Escríbenos a <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b78647b64797f6e7b6e7f716e654b6c666a626725686466">[email&#160;protected]</a></strong> con tu número de pedido y una foto o descripción del problema. Te respondemos en menos de 24 horas.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">💵 Reembolso</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Una vez aprobada la devolución, procesamos el reembolso completo o enviamos un producto de reemplazo sin costo, según tu preferencia.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">❌ Casos no aceptados</h3>
@@ -3728,7 +3726,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 style="font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:#1A2E1A;margin-bottom:0.5rem;">Política de Privacidad</h2>
     <p style="font-size:0.78rem;color:#888;margin-bottom:2rem;">Última actualización: abril 2026</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">1. Responsable del tratamiento</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen es operado por una persona natural con domicilio en Manizales, Colombia. Contacto: soportepetzen@gmail.com.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen es operado por una persona natural con domicilio en Manizales, Colombia. Contacto: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c5f435c435e58495c49585649426c4b414d4540024f4341">[email&#160;protected]</a>.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">2. Datos que recopilamos</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Recopilamos nombre, apellido, teléfono, correo electrónico y dirección de entrega al realizar un pedido. No recopilamos datos de tarjetas directamente.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">3. Finalidad del tratamiento</h3>
@@ -3736,7 +3734,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">4. Compartición de datos</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Sus datos no se venden. Solo se comparten con la transportadora en la medida necesaria para la entrega.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">5. Derechos del titular</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Según la Ley 1581 de 2012, puede conocer, actualizar, rectificar y suprimir sus datos escribiendo a soportepetzen@gmail.com.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Según la Ley 1581 de 2012, puede conocer, actualizar, rectificar y suprimir sus datos escribiendo a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa89958a95888e9f8a9f8e809f94ba9d979b9396d4999597">[email&#160;protected]</a>.</p>
   </div>
 
   <div id="legal_terms">
@@ -3759,17 +3757,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="legal_cookies">
     <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#5BA55B;margin-bottom:0.5rem;">Legal</div>
-    <h2 style="font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:#1A2E1A;margin-bottom:0.5rem;">Política de Cookies</h2>
-    <p style="font-size:0.78rem;color:#888;margin-bottom:2rem;">Última actualización: abril 2026</p>
-    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">1. ¿Qué son las cookies?</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Las cookies son pequeños archivos de texto que se almacenan en su dispositivo al visitar un sitio web.</p>
-    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">2. Cookies que utilizamos</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen utiliza únicamente cookies técnicas esenciales para el funcionamiento del sitio. No utilizamos cookies de seguimiento o publicidad.</p>
-    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">3. Control de cookies</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Puede configurar su navegador para rechazar cookies, aunque esto puede afectar el funcionamiento del sitio.</p>
-  </div>
-
-</div>
-
-</body>
-</html>
+    <h2 style="font-family:'Lora',serif;font
