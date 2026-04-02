@@ -1221,10 +1221,23 @@
     .carousel-controls { gap: 0.5rem; }
 
     /* POPUP */
-    .popup-inner { grid-template-columns: 1fr; max-height: 95vh; }
-    .popup-media { padding: 1rem; }
-    .popup-info { padding: 1.2rem; }
-    #universalPopup { padding: 0.5rem; }
+    #universalPopup { padding: 0; overflow-y: auto; }
+    .popup-inner { 
+      grid-template-columns: 1fr; 
+      max-height: none;
+      overflow: visible;
+    }
+    .popup-media { padding: 1rem; max-height: 60vw; }
+    #popupMediaWrap { aspect-ratio: 1/1; max-height: 60vw; }
+    .popup-info { 
+      padding: 1.2rem; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.8rem;
+      overflow-y: visible;
+      max-height: none;
+    }
+    .popup-close { font-size: 1.5rem; }
 
     /* BEFORE/AFTER */
     .proof-grid { grid-template-columns: 1fr; }
