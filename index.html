@@ -1210,10 +1210,11 @@
     nav ul { display: none !important; }
     nav { padding: 0.6rem 1rem !important; }
     
-    /* Carousel */
+    /* Carousel - 1 slide full width on mobile */
     .carousel-track-wrap { width: 100% !important; overflow: hidden !important; }
-    .carousel-slide { flex: 0 0 calc(50% - 0.3rem) !important; min-width: 0 !important; }
-    .hero-carousel { overflow: hidden !important; }
+    .carousel-slide { flex: 0 0 100% !important; min-width: 0 !important; width: 100% !important; }
+    .hero-carousel { overflow: hidden !important; width: 100% !important; }
+    .carousel-track { gap: 0 !important; }
     
     /* Products grid 2 col */
     .products-grid { grid-template-columns: 1fr 1fr !important; gap: 0.8rem !important; }
@@ -2784,7 +2785,8 @@ function goToSlide(index) {
   carouselIndex = Math.max(0, Math.min(index, carouselMaxIndex));
   if (!carouselTrack || !carouselTrack.children[0]) return;
   var slide = carouselTrack.children[0];
-  var slideWidth = slide.offsetWidth + parseInt(window.getComputedStyle(carouselTrack).gap || '10');
+  var gap = parseInt(window.getComputedStyle(carouselTrack).gap) || 0;
+  var slideWidth = slide.offsetWidth + gap;
   carouselTrack.style.transform = 'translateX(-' + (carouselIndex * slideWidth) + 'px)';
   document.querySelectorAll('.carousel-dot').forEach(function(d, i){ d.classList.toggle('active', i === carouselIndex); });
 }
