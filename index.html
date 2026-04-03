@@ -90,14 +90,15 @@
   }
   .cart-overlay.open { display: block; opacity: 1; }
   .cart-drawer {
-    position: fixed; top: 0; right: -480px; bottom: 0;
+    position: fixed; top: 0; right: 0; bottom: 0;
     width: 100%; max-width: 460px;
     background: var(--warm-white); z-index: 501;
-    display: flex; flex-direction: column;
-    transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: none; flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
     box-shadow: -8px 0 32px rgba(14,31,14,0.15);
+    transform: translateX(100%);
   }
-  .cart-drawer.open { right: 0; }
+  .cart-drawer.open { display: flex; transform: translateX(0); }
   .cart-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 1.5rem; border-bottom: 1px solid rgba(26,46,26,0.08);
@@ -1272,6 +1273,35 @@
 <body>
 <style>
 @media (max-width: 768px) {
+  html, body { overflow-x: hidden !important; width: 100% !important; }
+  img, video { max-width: 100% !important; }
+  .hero { flex-direction: column !important; min-height: auto !important; padding-top: 5rem !important; }
+  .hero-text { width: 100% !important; flex: none !important; padding: 1.5rem 1rem !important; }
+  .hero-carousel { width: 100% !important; flex: none !important; padding: 0.5rem 1rem 1.5rem !important; border-left: none !important; overflow: hidden !important; }
+  .carousel-track-wrap { width: 100% !important; overflow: hidden !important; }
+  .carousel-track { gap: 0 !important; }
+  .carousel-slide { flex: 0 0 100% !important; width: 100% !important; min-width: 0 !important; }
+  nav ul { display: none !important; }
+  nav { padding: 0.6rem 1rem !important; }
+  .hero-product-grid { grid-template-columns: 1fr !important; }
+  .products-grid { grid-template-columns: 1fr 1fr !important; }
+  .why-grid { grid-template-columns: 1fr !important; }
+  .how-grid { grid-template-columns: 1fr 1fr !important; }
+  .reviews-grid { grid-template-columns: 1fr !important; }
+  #hpReviewsList { grid-template-columns: 1fr !important; }
+  .footer-top { grid-template-columns: 1fr 1fr !important; }
+  footer { padding: 2rem 1rem !important; }
+  .guarantee-grid { grid-template-columns: 1fr 1fr !important; padding: 1rem !important; }
+  .before-after-grid { grid-template-columns: 1fr !important; }
+  .hero-product, .how-it-works, .other-products, .why-petzen, .faq, .reviews-section, .spec-banner { padding: 2rem 1rem !important; }
+  #contacto > div { grid-template-columns: 1fr !important; }
+  .popup-inner { grid-template-columns: 1fr !important; min-height: auto !important; }
+  .popup-info { max-height: 60vh !important; overflow-y: auto !important; }
+  .newsletter { flex-direction: column !important; padding: 2rem 1rem !important; }
+}
+</style>
+<style>
+@media (max-width: 768px) {
   html, body {
     overflow-x: hidden !important;
     width: 100% !important;
@@ -1354,7 +1384,7 @@
 <div class="announcement-bar">
   <span>🚚 <strong>Envío GRATIS</strong> en todos los productos — A todo Colombia</span>
   <span style="opacity:0.6;">|</span>
-  <span>🚚 Envío rápido a todo Colombia</span>
+  <span>🚚 Envío rápido a todo Colombia a todo Colombia</span>
   <span style="opacity:0.6;">|</span>
   <span>↩️ Garantía de satisfacción 15 días</span>
 </div>
@@ -1428,42 +1458,7 @@
     <div class="carousel-track-wrap">
       <div class="carousel-track" id="carouselTrack">
 
-        <div class="carousel-slide" onclick="openPopup('steambrush')" onmouseenter="carouselSlideshowStart(this,'steambrush')" onmouseleave="carouselSlideshowStop(this,'steambrush')">
-          <div class="carousel-slide-img" style="background:#FFF7ED;">
-            <div class="carousel-slide-ph" style="display:flex;"><span>🌫️</span><span>Cepillo Vapor</span></div>
-            <img src="petZen Images/Cepillo a vapor/Screenshot_20260331-124053.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
-          </div>
-          <div class="carousel-slide-body">
-            <div class="carousel-slide-name">Cepillo a Vapor para Mascotas</div>
-            <div class="carousel-slide-price">$34.900</div>
-          </div>
-          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('steambrush','')">Ver más</button>
-        </div>
-
-        <div class="carousel-slide" onclick="openPopup('dryerbrush')" onmouseenter="carouselSlideshowStart(this,'dryerbrush')" onmouseleave="carouselSlideshowStop(this,'dryerbrush')">
-          <div class="carousel-slide-img" style="background:#EAF4EA;">
-            <div class="carousel-slide-ph" style="display:flex;"><span>💨</span><span>Secador 2en1</span></div>
-            <img src="petZen Images/Secador de pelo peine/1.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
-          </div>
-          <div class="carousel-slide-body">
-            <div class="carousel-slide-name">Cepillo Secador 2en1 para Mascotas</div>
-            <div class="carousel-slide-price">$79.900</div>
-          </div>
-          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('dryerbrush','')">Ver más</button>
-        </div>
-
-        <div class="carousel-slide" onclick="openPopup('collarled')" onmouseenter="carouselSlideshowStart(this,'collarled')" onmouseleave="carouselSlideshowStop(this,'collarled')">
-          <div class="carousel-slide-img" style="background:#1A1A2E;">
-            <div class="carousel-slide-ph" style="display:flex;"><span>💡</span><span style="color:white;">Collar LED</span></div>
-            <img src="petZen Images/Collar led/1.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
-          </div>
-          <div class="carousel-slide-body">
-            <div class="carousel-slide-name">Collar Reflectivo para Mascotas</div>
-            <div class="carousel-slide-price">$44.900</div>
-          </div>
-          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('collarled','')">Ver más</button>
-        </div>
-
+        
         <div class="carousel-slide" onclick="openPopup('brush')" onmouseenter="carouselSlideshowStart(this,'brush')" onmouseleave="carouselSlideshowStop(this,'brush')">
           <div class="carousel-slide-img" style="background:#D4EAC8;">
             <div class="carousel-slide-ph" style="display:flex;"><span>🪮</span><span>Cepillo Depilador</span></div>
@@ -1471,23 +1466,21 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Cepillo Depilador para Mascotas</div>
-            <div class="carousel-slide-price">$44.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$65.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$44.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-brush">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-brush">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('brush','')">Ver más</button>
         </div>
-
-        <div class="carousel-slide" onclick="openPopup('glove')" onmouseenter="carouselVideoHover(this,'glove')" onmouseleave="carouselVideoLeave(this,'glove')">
-          <div class="carousel-slide-img" style="background:#E8D5C4;">
-            <div class="carousel-slide-ph" style="display:none;"><span>🧤</span><span>Guante Depilador</span></div>
-            <img src="petZen Images/Pet grooming glove/2.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:1;" onerror="this.style.display='none';">
+        <div class="carousel-slide" onclick="openPopup('collarled')" onmouseenter="carouselSlideshowStart(this,'collarled')" onmouseleave="carouselSlideshowStop(this,'collarled')">
+          <div class="carousel-slide-img" style="background:#1A1A2E;">
+            <div class="carousel-slide-ph" style="display:flex;"><span>💡</span><span style="color:white;">Collar LED</span></div>
+            <img src="petZen Images/Collar led/1.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
           </div>
           <div class="carousel-slide-body">
-            <div class="carousel-slide-name">Guante Masajeador para Mascotas</div>
-            <div class="carousel-slide-price">$39.900</div>
+            <div class="carousel-slide-name">Collar Reflectivo para Mascotas</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$70.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$44.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-brush">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-brush">0</span> disponibles</div>  </div></div>
           </div>
-          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('glove','')">Ver más</button>
+          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('collarled','')">Ver más</button>
         </div>
-
         <div class="carousel-slide" onclick="openPopup('paw')" onmouseenter="carouselSlideshowStart(this,'paw')" onmouseleave="carouselSlideshowStop(this,'paw')">
           <div class="carousel-slide-img" style="background:#C8E0D4;">
             <div class="carousel-slide-ph" style="display:flex;"><span>🐾</span><span>Paw Cleaner</span></div>
@@ -1495,11 +1488,21 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Limpiador de Patas para Mascotas</div>
-            <div class="carousel-slide-price">$49.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$75.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$49.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-paw">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-paw">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('paw','')">Ver más</button>
         </div>
-
+        <div class="carousel-slide" onclick="openPopup('glove')" onmouseenter="carouselVideoHover(this,'glove')" onmouseleave="carouselVideoLeave(this,'glove')">
+          <div class="carousel-slide-img" style="background:#E8D5C4;">
+            <div class="carousel-slide-ph" style="display:none;"><span>🧤</span><span>Guante Depilador</span></div>
+            <img src="petZen Images/Pet grooming glove/2.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:1;" onerror="this.style.display='none';">
+          </div>
+          <div class="carousel-slide-body">
+            <div class="carousel-slide-name">Guante Masajeador para Mascotas</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$60.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$39.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-glove">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-glove">0</span> disponibles</div>  </div></div>
+          </div>
+          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('glove','')">Ver más</button>
+        </div>
         <div class="carousel-slide" onclick="openPopup('water')" onmouseenter="carouselSlideshowStart(this,'water')" onmouseleave="carouselSlideshowStop(this,'water')">
           <div class="carousel-slide-img" style="background:#ffffff;">
             <div class="carousel-slide-ph" style="display:flex;"><span>💧</span><span>Dispensador 2en1</span></div>
@@ -1507,11 +1510,10 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Dispensador Agua y Comida para Mascotas</div>
-            <div class="carousel-slide-price">$79.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$110.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$79.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-water">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-water">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('water','',true)">Ver más</button>
         </div>
-
         <div class="carousel-slide" onclick="openPopup('removedorpelo')" onmouseenter="carouselSlideshowStart(this,'removedorpelo')" onmouseleave="carouselSlideshowStop(this,'removedorpelo')">
           <div class="carousel-slide-img" style="background:#E8D5C4;">
             <div class="carousel-slide-ph" style="display:flex;"><span>✂️</span><span>Removedor Doble Filo</span></div>
@@ -1519,11 +1521,10 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Peine Deslanador para Mascotas</div>
-            <div class="carousel-slide-price">$54.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$85.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$54.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-removedorpelo">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-removedorpelo">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('removedorpelo','')">Ver más</button>
         </div>
-
         <div class="carousel-slide" onclick="openPopup('nailclipper')" onmouseenter="carouselSlideshowStart(this,'nailclipper')" onmouseleave="carouselSlideshowStop(this,'nailclipper')">
           <div class="carousel-slide-img" style="background:#D8E8D0;">
             <div class="carousel-slide-ph" style="display:flex;"><span>✂️</span><span>Cortador de Uñas</span></div>
@@ -1531,11 +1532,10 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Cortador de Uñas para Mascotas</div>
-            <div class="carousel-slide-price">$29.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$45.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$29.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-nailclipper">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-nailclipper">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('nailclipper','')">Ver más</button>
         </div>
-
         <div class="carousel-slide" onclick="openPopup('silicone')" onmouseenter="carouselVideoHover(this,'silicone')" onmouseleave="carouselVideoLeave(this,'silicone')">
           <div class="carousel-slide-img" style="background:#C8E0BC;">
             <div class="carousel-slide-ph" style="display:none;"><span>🛁</span><span>Cepillo Silicona</span></div>
@@ -1543,11 +1543,10 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Cepillo de Baño para Mascotas</div>
-            <div class="carousel-slide-price">$32.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$50.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$32.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-silicone">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-silicone">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('silicone','')">Ver más</button>
         </div>
-
         <div class="carousel-slide" onclick="openPopup('teeth')" onmouseenter="carouselSlideshowStart(this,'teeth')" onmouseleave="carouselSlideshowStop(this,'teeth')">
           <div class="carousel-slide-img" style="background:#D4E8C0;">
             <div class="carousel-slide-ph" style="display:flex;"><span>🦷</span><span>Cepillo Dental</span></div>
@@ -1555,11 +1554,33 @@
           </div>
           <div class="carousel-slide-body">
             <div class="carousel-slide-name">Cepillo Dental para Mascotas</div>
-            <div class="carousel-slide-price">$39.900</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$60.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$39.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-glove">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-glove">0</span> disponibles</div>  </div></div>
           </div>
           <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('teeth','')">Ver más</button>
         </div>
-
+        <div class="carousel-slide" onclick="openPopup('dryerbrush')" onmouseenter="carouselSlideshowStart(this,'dryerbrush')" onmouseleave="carouselSlideshowStop(this,'dryerbrush')">
+          <div class="carousel-slide-img" style="background:#EAF4EA;">
+            <div class="carousel-slide-ph" style="display:flex;"><span>💨</span><span>Secador 2en1</span></div>
+            <img src="petZen Images/Secador de pelo peine/1.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="carousel-slide-body">
+            <div class="carousel-slide-name">Cepillo Secador 2en1 para Mascotas</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$120.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$79.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-water">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-water">0</span> disponibles</div>  </div></div>
+          </div>
+          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('dryerbrush','')">Ver más</button>
+        </div>
+        <div class="carousel-slide" onclick="openPopup('steambrush')" onmouseenter="carouselSlideshowStart(this,'steambrush')" onmouseleave="carouselSlideshowStop(this,'steambrush')">
+          <div class="carousel-slide-img" style="background:#FFF7ED;">
+            <div class="carousel-slide-ph" style="display:flex;"><span>🌫️</span><span>Cepillo Vapor</span></div>
+            <img src="petZen Images/Cepillo a vapor/Screenshot_20260331-124053.png" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0;" onload="this.style.opacity='1';this.previousElementSibling.style.display='none';" onerror="this.style.display='none';">
+          </div>
+          <div class="carousel-slide-body">
+            <div class="carousel-slide-name">Cepillo a Vapor para Mascotas</div>
+            <div style="padding:0 0.6rem 0.2rem;">  <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:0.15rem;">    <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>    <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$55.000</span>  </div>  <div class="carousel-slide-price" style="font-size:0.95rem;font-weight:800;color:var(--honey);">$34.900</div>  <div style="margin-top:0.3rem;text-align:left;padding-left:0;">    <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.15rem;">👁 <span class="cs-viewers-steambrush">0</span> personas viendo</div>    <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="cs-stock-steambrush">0</span> disponibles</div>  </div></div>
+          </div>
+          <button class="carousel-slide-btn" onclick="event.stopPropagation();addToCart('steambrush','')">Ver más</button>
+        </div>
+      
       </div>
     </div>
     <div class="carousel-controls">
@@ -1581,13 +1602,13 @@
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span>Envío rápido a todo Colombia</span><span class="dot">•</span>
+    <span>Envío a todo Colombia a todo Colombia</span><span class="dot">•</span>
     <span>Gadgets para mascotas</span><span class="dot">•</span>
     <span>Garantía de satisfacción</span><span class="dot">•</span>
     <span>Pago seguro</span><span class="dot">•</span>
     <span>Atención al cliente</span><span class="dot">•</span>
     <span>Empresa colombiana</span><span class="dot">•</span>
-    <span>Envío rápido a todo Colombia</span><span class="dot">•</span>
+    <span>Envío a todo Colombia a todo Colombia</span><span class="dot">•</span>
     <span>Gadgets para mascotas</span><span class="dot">•</span>
     <span>Garantía de satisfacción</span><span class="dot">•</span>
     <span>Pago seguro</span><span class="dot">•</span>
@@ -1641,7 +1662,7 @@
       </div>
       <div class="hp-price-box">
         <div>
-          <span class="hp-price">$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.15rem 0.5rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></span>
+          <span class="hp-price"><span style="font-size:1rem;text-decoration:line-through;color:#aaa;margin-right:0.4rem;">$65.000</span>$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.15rem 0.5rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></span>
         </div>
         <span class="hp-stock">✅ En stock · <span style="color:#E05050;" id="heroViewers">12</span> personas viendo</span>
       </div>
@@ -1700,7 +1721,7 @@
 
 <!-- GARANTÍA VISIBLE -->
 <div style="background:#1A2E1A;padding:1.5rem 5rem;">
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;" class="guarantee-grid">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center;" class="guarantee-grid" class="guarantee-grid">
     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
       <span style="font-size:1.8rem;">🛡️</span>
       <div style="font-size:0.82rem;font-weight:700;color:#F0F5EE;">Garantía 15 días</div>
@@ -1709,7 +1730,7 @@
     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
       <span style="font-size:1.8rem;">🚚</span>
       <div style="font-size:0.82rem;font-weight:700;color:#F0F5EE;">Envío rápido</div>
-      <div style="font-size:0.72rem;color:rgba(240,245,238,0.65);line-height:1.5;">Enviamos a cualquier ciudad con número de seguimiento incluido</div>
+      <div style="font-size:0.72rem;color:rgba(240,245,238,0.65);line-height:1.5;">Despachamos a cualquier ciudad con número de seguimiento incluido</div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
       <span style="font-size:1.8rem;">🔒</span>
@@ -1744,10 +1765,19 @@
         <div class="product-category">Baño & Cuidado</div>
         <div class="product-name">Cepillo Secador 2en1 para Mascotas</div>
         <div class="product-desc">Seca y peina al mismo tiempo. Silencioso, con 2 niveles de calor.</div>
-        <div class="product-footer">
-          <div class="product-price">$79.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('dryerbrush','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$120.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$79.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('dryerbrush','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-dryerbrush">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-dryerbrush">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1761,10 +1791,19 @@
         <div class="product-category">Baño & Cuidado</div>
         <div class="product-name">Cepillo a Vapor para Mascotas</div>
         <div class="product-desc">Spray de vapor integrado. Masajea, hidrata y elimina pelo suelto.</div>
-        <div class="product-footer">
-          <div class="product-price">$34.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('steambrush','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$55.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$34.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('steambrush','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-steambrush">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-steambrush">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1778,10 +1817,19 @@
         <div class="product-category">Seguridad &amp; Paseo</div>
         <div class="product-name">Collar Reflectivo para Mascotas</div>
         <div class="product-desc">Visible hasta 500m. Ideal para paseos nocturnos.</div>
-        <div class="product-footer">
-          <div class="product-price">$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('collarled','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$70.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('collarled','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-collarled">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-collarled">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1795,10 +1843,19 @@
         <div class="product-category">Aseo &amp; Pelaje</div>
         <div class="product-name">Cepillo Depilador para Mascotas</div>
         <div class="product-desc">Elimina pelo suelto en segundos. Botón autolimpiante.</div>
-        <div class="product-footer">
-          <div class="product-price">$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('brush','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$65.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$44.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('brush','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-brush">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-brush">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1812,10 +1869,19 @@
         <div class="product-category">Aseo & Pelaje</div>
         <div class="product-name">Guante Masajeador para Mascotas</div>
         <div class="product-desc">Elimina el pelo suelto mientras acaricias a tu mascota.</div>
-        <div class="product-footer">
-          <div class="product-price">$39.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('glove','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$60.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$39.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('glove','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-glove">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-glove">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1829,10 +1895,19 @@
         <div class="product-category">Limpieza</div>
         <div class="product-name">Limpiador Portátil de Patas para Mascotas</div>
         <div class="product-desc">Limpia las patas de tu mascota en segundos con agua.</div>
-        <div class="product-footer">
-          <div class="product-price">$49.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('paw','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$75.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$49.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('paw','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-paw">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-paw">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1846,10 +1921,19 @@
         <div class="product-category">Paseo & Viaje</div>
         <div class="product-name">Dispensador Agua y Comida para Mascotas</div>
         <div class="product-desc">Diseño de gatito. Agua y comida en un solo gadget antifugas.</div>
-        <div class="product-footer">
-          <div class="product-price">$79.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('water','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$110.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$79.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('water','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-water">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-water">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1863,10 +1947,19 @@
         <div class="product-category">Aseo & Pelaje</div>
         <div class="product-name">Peine Deslanador para Mascotas</div>
         <div class="product-desc">Peine de doble filo con cuchilla cerámica para un aseo profesional.</div>
-        <div class="product-footer">
-          <div class="product-price">$54.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('removedorpelo','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$85.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$54.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('removedorpelo','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-removedorpelo">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-removedorpelo">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1880,10 +1973,19 @@
         <div class="product-category">Higiene &amp; Cuidado</div>
         <div class="product-name">Cortador de Uñas para Mascotas</div>
         <div class="product-desc">Acero inoxidable 3Cr13 con tope de seguridad. Incluye lima.</div>
-        <div class="product-footer">
-          <div class="product-price">$29.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('nailclipper','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$45.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$29.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('nailclipper','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-nailclipper">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-nailclipper">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1897,10 +1999,19 @@
         <div class="product-category">Baño & Cuidado</div>
         <div class="product-name">Cepillo de Baño para Mascotas</div>
         <div class="product-desc">Dispensador de shampoo integrado con cerdas suaves.</div>
-        <div class="product-footer">
-          <div class="product-price">$32.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('silicone','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$50.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$32.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('silicone','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-silicone">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-silicone">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1914,10 +2025,19 @@
         <div class="product-category">Higiene Dental</div>
         <div class="product-name">Cepillo Dental para Mascotas</div>
         <div class="product-desc">Se adapta al dedo. Silicona flexible no tóxica. BPA Free.</div>
-        <div class="product-footer">
-          <div class="product-price">$39.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart('teeth','')">+</button>
-        </div>
+        <div class="product-footer" style="flex-direction:column;align-items:flex-start;gap:0.4rem;">
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="background:#E05050;color:white;font-size:0.55rem;font-weight:800;letter-spacing:0.1em;padding:0.1rem 0.4rem;border-radius:2px;">SALE</span>
+            <span style="font-size:0.72rem;text-decoration:line-through;color:#aaa;">$60.000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
+            <div class="product-price" style="font-size:1rem;">$39.900 COP <span style="font-size:0.58rem;background:#3A7A3A;color:white;padding:0.1rem 0.35rem;border-radius:2px;font-weight:700;vertical-align:middle;">Envío gratis</span></div>
+            <button class="add-btn" onclick="event.stopPropagation();addToCart('teeth','')">+</button>
+          </div>
+          <div style="text-align:left;margin-top:0.1rem;">
+            <div style="font-size:0.78rem;color:#E05050;font-weight:800;margin-bottom:0.1rem;">👁 <span class="pg-viewers-teeth">0</span> personas viendo</div>
+            <div style="font-size:0.78rem;color:#F5A623;font-weight:800;">⚡ Solo <span class="pg-stock-teeth">0</span> disponibles</div>
+          </div></div>
       </div>
     </div>
 
@@ -1944,7 +2064,7 @@
     <div class="how-step">
       <div class="how-number">4</div>
       <h3>Recíbelo en casa</h3>
-      <p>Enviamos a cualquier ciudad de Colombia. Te enviamos el número de seguimiento por email.</p>
+      <p>Despachamos a cualquier ciudad de Colombia. Te enviamos el número de seguimiento por email.</p>
     </div>
   </div>
 </section>
@@ -3247,6 +3367,13 @@ function closeLegal() {
   document.body.style.overflow = 'auto';
 }
 
+function selectHpColor(el, colorName) {
+  document.querySelectorAll('.hp-color-dot').forEach(function(d){ d.classList.remove('active'); });
+  el.classList.add('active');
+  var lbl = document.getElementById('hpColorLabel');
+  if (lbl) lbl.textContent = colorName;
+}
+
 function setHpImg(el) {
   document.getElementById('hpMainImg').src = el.src;
   document.querySelectorAll('.hp-thumb').forEach(function(t){ t.classList.remove('active'); });
@@ -3716,10 +3843,54 @@ document.addEventListener('DOMContentLoaded', function() {
   var viewerCountEl = document.getElementById('viewerCount');
   var stockUnitsEl = document.getElementById('stockUnits');
   function updateUrgency() {
+    document.querySelectorAll('.pg-viewers-dryerbrush').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-dryerbrush').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-steambrush').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-steambrush').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-collarled').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-collarled').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-brush').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-brush').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-glove').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-glove').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-paw').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-paw').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-water').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-water').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-removedorpelo').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-removedorpelo').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-nailclipper').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-nailclipper').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-silicone').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-silicone').forEach(function(e){e.textContent=randomBetween(3,12);}); 
+    document.querySelectorAll('.pg-viewers-teeth').forEach(function(e){e.textContent=randomBetween(2,15);});
+    document.querySelectorAll('.pg-stock-teeth').forEach(function(e){e.textContent=randomBetween(3,12);}); 
     if (heroViewersEl) heroViewersEl.textContent = randomBetween(8, 24);
     if (heroStockEl) heroStockEl.textContent = randomBetween(5, 12);
     if (viewerCountEl) viewerCountEl.textContent = randomBetween(6, 20);
     if (stockUnitsEl) stockUnitsEl.textContent = randomBetween(4, 10);
+    document.querySelectorAll('.cs-viewers-brush').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-brush').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-collarled').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-collarled').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-paw').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-paw').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-glove').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-glove').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-water').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-water').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-removedorpelo').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-removedorpelo').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-nailclipper').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-nailclipper').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-silicone').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-silicone').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-teeth').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-teeth').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-dryerbrush').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-dryerbrush').forEach(function(e){e.textContent=randomBetween(4,15);}); 
+    document.querySelectorAll('.cs-viewers-steambrush').forEach(function(e){e.textContent=randomBetween(3,18);});
+    document.querySelectorAll('.cs-stock-steambrush').forEach(function(e){e.textContent=randomBetween(4,15);}); 
   }
   updateUrgency();
   setInterval(updateUrgency, 8000);
@@ -3763,13 +3934,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 style="font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:#1A2E1A;margin-bottom:0.5rem;">Política de Envíos</h2>
     <p style="font-size:0.78rem;color:#888;margin-bottom:2rem;">Última actualización: abril 2026</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">🚚 Cobertura</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Realizamos envíos a todo el territorio colombiano a través de envío rápido. No realizamos envíos internacionales por el momento.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Realizamos envíos a todo el territorio colombiano con número de seguimiento. No realizamos envíos internacionales por el momento.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">💰 Costo de envío</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Todos nuestros productos incluyen envío gratis a cualquier ciudad de Colombia.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">⏱️ Tiempos de entrega</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Los tiempos varían según el producto. La mayoría llegan en 3-7 días hábiles. Algunos productos pueden tardar hasta 15-20 días hábiles. El tiempo estimado se indica en cada producto.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">📦 Seguimiento</h3>
-    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Una vez despachado tu pedido, recibirás el número de seguimiento a través de envío rápido para rastrear tu paquete en tiempo real.</p>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Una vez despachado tu pedido, recibirás el número de seguimiento con número de seguimiento para rastrear tu paquete en tiempo real.</p>
     <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">⚠️ Retrasos</h3>
     <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen no se hace responsable por retrasos causados por la empresa de transporte. Si tu pedido supera los tiempos estimados sin entrega, contáctanos a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="30435f405f4244554055444a555e70575d51595c1e535f5d">[email&#160;protected]</a>.</p>
   </div>
@@ -3830,4 +4001,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div id="legal_cookies">
     <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#5BA55B;margin-bottom:0.5rem;">Legal</div>
+    <h2 style="font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:#1A2E1A;margin-bottom:0.5rem;">Política de Cookies</h2>
+    <p style="font-size:0.78rem;color:#888;margin-bottom:2rem;">Última actualización: abril 2026</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">1. ¿Qué son las cookies?</h3>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Las cookies son pequeños archivos de texto que se almacenan en su dispositivo al visitar un sitio web.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">2. Cookies que utilizamos</h3>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">petZen utiliza únicamente cookies técnicas esenciales para el funcionamiento del sitio. No utilizamos cookies de seguimiento ni publicidad.</p>
+    <h3 style="font-size:1rem;font-weight:700;color:#1A2E1A;margin:1.5rem 0 0.5rem;">3. Control de cookies</h3>
+    <p style="font-size:0.88rem;color:#5A7055;line-height:1.75;">Puede configurar su navegador para rechazar cookies, aunque esto puede afectar el funcionamiento del sitio.</p>
     <h2 style="font-family:'Lora',serif;font
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/573009848000" target="_blank"
+   style="position:fixed;bottom:1.8rem;right:1.8rem;z-index:99999;background:#25D366;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.55);text-decoration:none;transition:transform 0.2s;"
+   onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+<div style="position:fixed;bottom:1.8rem;right:1.8rem;z-index:99998;width:60px;height:60px;border-radius:50%;background:rgba(37,211,102,0.35);animation:waPulseAnim 2s infinite;pointer-events:none;"></div>
+<style>@keyframes waPulseAnim{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.75);opacity:0}100%{transform:scale(1.75);opacity:0}}</style>
+
+</div>
+</body>
+</html>
