@@ -2186,7 +2186,7 @@
 </section>
 
 <!-- REVIEWS -->
-<section class="reviews-section" id="resenas">
+<section class="reviews-section" id="resenas" style="scroll-margin-top:80px;">
   <h2>Lo que dicen nuestros <em>clientes</em></h2>
   <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1.5rem;">Reseñas reales de clientes que han comprado en petZen</p>
 
@@ -2263,7 +2263,7 @@
 </div>
 
 <!-- FAQ -->
-<section class="faq" id="faq">
+<section class="faq" id="faq" style="scroll-margin-top:80px;">
   <h2>Preguntas <em>frecuentes</em></h2>
   <div class="faq-list">
     <div class="faq-item">
@@ -2305,7 +2305,7 @@
 </section>
 
 <!-- CONTACT + RETURNS -->
-<section id="contacto" style="background:var(--warm-white);padding:5rem 3rem;">
+<section id="contacto" style="scroll-margin-top:80px;background:var(--warm-white);padding:5rem 3rem;"background:var(--warm-white);padding:5rem 3rem;">
   <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
 
     <!-- Contact -->
@@ -3828,6 +3828,22 @@ function renderHpReviews(filterRating) {
     listEl.appendChild(card);
   });
 }
+
+
+// Scroll to section if redirected from landing page
+(function(){
+  var target = sessionStorage.getItem('scrollTo');
+  if (target) {
+    sessionStorage.removeItem('scrollTo');
+    setTimeout(function(){
+      var el = document.getElementById(target);
+      if (el) {
+        var offset = el.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    }, 500);
+  }
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
   // Initialize carousel

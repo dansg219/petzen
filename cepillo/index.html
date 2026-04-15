@@ -280,8 +280,8 @@ footer a:hover{color:white;}
   <a href="../index.html" class="logo" style="font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:rgba(240,245,238,0.8);">pet<span style="color:#5BA55B;">Zen</span></a>
   <span>© 2026 petZen · Manizales, Colombia</span>
   <div style="display:flex;gap:1rem;">
-    <a href="../#faq">FAQ</a>
-    <a href="../#contacto">Contacto</a>
+    <a href="javascript:void(0)" onclick="goToSection('faq')">FAQ</a>
+    <a href="javascript:void(0)" onclick="goToSection('contacto')">Contacto</a>
     <a href="https://wa.me/573009848000">WhatsApp</a>
   </div>
 </footer>
@@ -438,6 +438,75 @@ async function submitReview() {
     err.style.display='block';
   }
   btn.disabled=false; btn.textContent='Publicar reseña';
+}
+
+
+// SLIDESHOW - auto-advance every 2.5s
+var slideImages = ["petZen Images/Hair removal pet brush/cepillo 1.png", "petZen Images/Hair removal pet brush/cepillo 2.png", "petZen Images/Hair removal pet brush/cepillo 3.png", "petZen Images/Hair removal pet brush/cepillo 4.png", "petZen Images/Hair removal pet brush/cepillo 5.png", "petZen Images/Hair removal pet brush/cepillo 6.png"];
+var slideIdx = 0;
+var slideTimer = null;
+var isVideoPlaying = false;
+
+function startSlideshow() {
+  if (slideTimer) return;
+  slideTimer = setInterval(function() {
+    if (isVideoPlaying) return;
+    slideIdx = (slideIdx + 1) % slideImages.length;
+    var wrap = document.getElementById('mainWrap');
+    var img = wrap.querySelector('img');
+    if (img) {
+      img.style.opacity = '0';
+      setTimeout(function() {
+        img.src = '../' + slideImages[slideIdx];
+        img.style.opacity = '1';
+      }, 200);
+    }
+    // update active thumb
+    var thumbs = document.querySelectorAll('.thumb');
+    thumbs.forEach(function(t, i) { t.classList.toggle('active', i === slideIdx); });
+  }, 2500);
+}
+
+// Override setImg to pause slideshow temporarily
+var origSetImg = setImg;
+function setImg(el) {
+  clearInterval(slideTimer);
+  slideTimer = null;
+  var src = el.src;
+  slideIdx = slideImages.indexOf(src.replace(window.location.origin + window.location.pathname.replace('index.html',''), '../').replace('../',''));
+  if (slideIdx < 0) slideIdx = 0;
+  document.getElementById('mainWrap').innerHTML = '<img src="' + src + '" style="width:100%;height:100%;object-fit:contain;transition:opacity 0.3s;">';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
+  el.classList.add('active');
+  // restart after 5s
+  setTimeout(startSlideshow, 5000);
+}
+
+// Override playVideo to stop slideshow
+var origPlayVideo = typeof playVideo !== 'undefined' ? playVideo : function(){};
+function playVideo() {
+  clearInterval(slideTimer);
+  slideTimer = null;
+  isVideoPlaying = true;
+  var v = "";
+  if (!v) return;
+  var wrap = document.getElementById('mainWrap');
+  wrap.innerHTML = '<video src="../' + v + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+}
+
+// Add fade transition to main img
+document.addEventListener('DOMContentLoaded', function() {
+  var img = document.querySelector('#mainWrap img');
+  if (img) img.style.transition = 'opacity 0.3s ease';
+  setTimeout(startSlideshow, 3000); // start after 3s
+});
+
+
+function goToSection(id) {
+  sessionStorage.setItem('scrollTo', id);
+  window.location.href = '../index.html';
 }
 
 // Handle ?add= param from redirect
