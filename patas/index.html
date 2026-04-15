@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limpiador Portátil de Patas para Mascotas — petZen</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bark: #1A2E1A;
+  --green: #3A7A3A;
+  --honey: #5BA55B;
+  --cream: #F0F5EE;
+  --muted: #5A7055;
+  --red: #E05050;
+  --accent: #6AABDF;
+  --bg: #E0EEF8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--bark);overflow-x:hidden;}
+
+/* TOP BAR */
+.topbar{background:var(--bark);color:white;text-align:center;padding:0.5rem 1rem;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;}
+.topbar span{color:var(--honey);}
+
+/* NAV */
+.nav{background:rgba(247,250,245,0.97);backdrop-filter:blur(12px);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(26,46,26,0.08);position:sticky;top:0;z-index:100;}
+.logo{font-family:'Lora',serif;font-size:1.5rem;font-weight:700;text-decoration:none;color:var(--bark);}
+.logo span{color:var(--honey);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.back-link{font-size:0.78rem;font-weight:700;color:var(--muted);text-decoration:none;letter-spacing:0.04em;}
+.back-link:hover{color:var(--bark);}
+.cart-btn{background:var(--bark);color:white;border:none;padding:0.55rem 1.2rem;font-family:'Nunito',sans-serif;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.04em;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;background:white;}
+.media-col{padding:2.5rem;background:var(--bg);display:flex;flex-direction:column;gap:1rem;position:sticky;top:60px;align-self:start;}
+.main-img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:white;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+.main-img-wrap img{width:100%;height:100%;object-fit:contain;transition:transform 0.4s;}
+.main-img-wrap:hover img{transform:scale(1.04);}
+.main-img-wrap video{width:100%;height:100%;object-fit:contain;}
+.thumbs{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.thumb,.vthumb{width:64px;height:64px;object-fit:cover;cursor:pointer;border:2px solid transparent;opacity:0.6;transition:all 0.2s;border-radius:3px;}
+.thumb:hover,.thumb.active,.vthumb:hover,.vthumb.active{border-color:var(--accent);opacity:1;}
+.vthumb{background:var(--bark);color:white;display:flex;align-items:center;justify-content:center;font-size:1.4rem;border-radius:3px;}
+
+/* INFO COL */
+.info-col{padding:2.5rem 2.5rem 2.5rem 2rem;display:flex;flex-direction:column;gap:1.1rem;overflow-y:auto;}
+.category{font-size:0.68rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--honey);}
+.product-title{font-family:'Lora',serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;line-height:1.2;}
+.stars{color:#F5A623;font-size:0.9rem;}
+.stars span{color:var(--muted);font-size:0.8rem;}
+.product-desc{font-size:0.9rem;color:var(--muted);line-height:1.8;}
+
+/* PRICE BOX */
+.price-box{background:var(--cream);padding:1.2rem 1.4rem;border-left:4px solid var(--accent);}
+.price-row{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.4rem;}
+.badge-oferta{background:var(--red);color:white;font-size:0.6rem;font-weight:800;letter-spacing:0.1em;padding:0.2rem 0.5rem;border-radius:2px;}
+.price-old{font-size:0.9rem;text-decoration:line-through;color:#aaa;}
+.price{font-family:'Lora',serif;font-size:2rem;font-weight:700;color:var(--bark);}
+.price-sub{font-size:0.72rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap;}
+.price-sub span{display:flex;align-items:center;gap:0.3rem;}
+
+/* URGENCY */
+.urgency{background:#FFF3CD;border:1px solid #F5A623;padding:0.7rem 1rem;font-size:0.8rem;font-weight:700;color:#92400E;display:flex;align-items:center;gap:0.5rem;}
+.viewers{display:flex;gap:1rem;font-size:0.75rem;font-weight:700;}
+.viewers .v{color:var(--red);} .viewers .s{color:#F5A623;}
+
+/* OPTIONS */
+.option-group{display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;}
+.option-label{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--bark);}
+.option-val{font-size:0.82rem;color:var(--muted);}
+.color-dots{display:flex;gap:0.5rem;align-items:center;}
+.cdot{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform 0.2s;}
+.cdot.active,.cdot:hover{border-color:var(--bark);transform:scale(1.15);}
+.size-btns{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.sbtn{padding:0.3rem 0.8rem;border:1.5px solid #ccc;background:white;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;border-radius:2px;}
+.sbtn.active,.sbtn:hover{background:var(--bark);color:white;border-color:var(--bark);}
+
+/* FEATURES */
+.features{list-style:none;display:flex;flex-direction:column;gap:0.5rem;background:white;padding:1rem 1.2rem;border-radius:4px;}
+.features li{font-size:0.85rem;display:flex;align-items:flex-start;gap:0.6rem;line-height:1.5;}
+.check{color:var(--honey);font-weight:800;flex-shrink:0;}
+
+/* CTA */
+.cta-group{display:flex;flex-direction:column;gap:0.7rem;}
+.btn-main{background:var(--bark);color:white;border:none;padding:1.1rem;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;width:100%;}
+.btn-main:hover{background:var(--green);}
+.btn-wa{background:#25D366;color:white;border:none;padding:0.9rem;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:background 0.2s;}
+.btn-wa:hover{background:#1da851;}
+.guarantee{display:flex;gap:1rem;flex-wrap:wrap;font-size:0.72rem;color:var(--muted);justify-content:center;}
+.guarantee span{display:flex;align-items:center;gap:0.3rem;}
+
+/* PAYMENTS */
+.payments{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}
+.payments span{font-size:0.68rem;font-weight:700;color:var(--muted);}
+.pay-badge{font-size:0.62rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:3px;color:white;}
+
+/* DELIVERY */
+.delivery-box{background:#EAF4EA;border:1px solid var(--honey);padding:0.7rem 1rem;font-size:0.82rem;font-weight:700;color:var(--bark);border-radius:3px;}
+
+/* SOCIAL PROOF SECTION */
+.proof-section{padding:4rem 5rem;background:white;}
+.proof-section h2{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;margin-bottom:0.5rem;}
+.proof-section h2 em{font-style:italic;color:var(--green);}
+.proof-sub{font-size:0.88rem;color:var(--muted);margin-bottom:2rem;}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.review-card{padding:1.4rem;border:1px solid rgba(26,46,26,0.08);border-radius:4px;}
+.review-stars{color:#F5A623;font-size:0.82rem;margin-bottom:0.6rem;}
+.review-text{font-size:0.85rem;color:var(--muted);line-height:1.75;font-style:italic;margin-bottom:1rem;}
+.review-author{display:flex;align-items:center;gap:0.7rem;}
+.review-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;color:white;flex-shrink:0;}
+.review-name{font-size:0.82rem;font-weight:700;}
+.review-city{font-size:0.7rem;color:var(--muted);}
+
+/* HOW IT WORKS */
+.how-section{padding:4rem 5rem;background:var(--cream);}
+.how-section h2{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;text-align:center;margin-bottom:2.5rem;}
+.how-section h2 em{font-style:italic;color:var(--green);}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+.step{text-align:center;padding:1.5rem;}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--bark);color:white;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:1.2rem;font-weight:700;margin:0 auto 0.8rem;}
+.step h3{font-family:'Lora',serif;font-size:0.95rem;font-weight:700;margin-bottom:0.3rem;}
+.step p{font-size:0.8rem;color:var(--muted);line-height:1.6;}
+
+/* CTA BOTTOM */
+.cta-bottom{background:var(--bark);padding:3rem 5rem;text-align:center;}
+.cta-bottom h2{font-family:'Lora',serif;font-size:1.8rem;font-weight:700;color:white;margin-bottom:1rem;}
+.cta-bottom h2 em{color:var(--honey);font-style:italic;}
+.cta-bottom p{font-size:0.9rem;color:rgba(240,245,238,0.75);margin-bottom:2rem;}
+.cta-bottom .btn-main{max-width:320px;margin:0 auto;display:block;}
+
+/* FOOTER */
+footer{background:#0E1F0E;color:rgba(240,245,238,0.5);padding:1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;flex-wrap:wrap;gap:1rem;}
+footer a{color:rgba(240,245,238,0.5);text-decoration:none;}
+footer a:hover{color:white;}
+
+/* WHATSAPP */
+.wa-float{position:fixed;bottom:1.8rem;right:1.8rem;z-index:9999;background:#25D366;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.5);text-decoration:none;transition:transform 0.2s;}
+.wa-float:hover{transform:scale(1.1);}
+.wa-pulse{position:fixed;bottom:1.8rem;right:1.8rem;z-index:9998;width:58px;height:58px;border-radius:50%;background:rgba(37,211,102,0.35);animation:waPulse 2s infinite;pointer-events:none;}
+@keyframes waPulse{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.7);opacity:0}100%{transform:scale(1.7);opacity:0}}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bark);color:white;padding:0.9rem 1.5rem;font-size:0.85rem;font-weight:700;border-radius:3px;z-index:9999;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .media-col{position:static;padding:1rem;}
+  .info-col{padding:1.2rem;}
+  .proof-section,.how-section,.cta-bottom{padding:2.5rem 1rem;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .nav{padding:0.7rem 1rem;}
+  footer{flex-direction:column;text-align:center;padding:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">🚚 <span>Envío GRATIS</span> a todo Colombia · ↩️ Garantía 15 días · 🔒 Pago seguro</div>
+
+<nav class="nav">
+  <a href="../" class="logo">pet<span>Zen</span></a>
+  <div class="nav-right">
+    <a href="../" class="back-link">← Ver todos los productos</a>
+    <button class="cart-btn" onclick="window.location.href='../#producto-estrella'">🛒 Tienda</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="media-col">
+    <div class="main-img-wrap" id="mainWrap">
+      <img id="mainImg" src="../petZen Images/Paw cleaner/1.png" alt="Limpiador Portátil de Patas para Mascotas" onerror="this.style.display='none'">
+    </div>
+    <div class="thumbs" id="thumbsRow">
+      <img src="../petZen Images/Paw cleaner/1.png" class="thumb active" onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183147.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183208.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183218.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183226.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'">
+    </div>
+  </div>
+
+  <div class="info-col">
+    <div class="category">PAW — Para perros y gatos</div>
+    <h1 class="product-title">Limpiador Portátil de Patas para Mascotas</h1>
+    <div class="stars">★★★★★ <span>4.9 · +200 reseñas verificadas</span></div>
+    <p class="product-desc">Limpia las patas de tu perro o gato en segundos con cerdas de silicona suaves. Solo necesitas agua. Compacto y fácil de llevar a cualquier parte — ideal para después del paseo.</p>
+
+    <div class="price-box">
+      <div class="price-row">
+        <span class="badge-oferta">OFERTA</span>
+        <span class="price-old">$75.000</span>
+      </div>
+      <div class="price">$49.900 COP</div>
+      <div class="price-sub">
+        <span>✅ En stock</span>
+        <span>🚚 Envío gratis incluido</span>
+      </div>
+    </div>
+
+    <div class="urgency">
+      ⚠️ ¡Solo quedan <span id="stockNum">8</span> unidades disponibles
+    </div>
+    <div class="viewers">
+      <span class="v">👁 <span id="viewNum">14</span> personas viendo ahora</span>
+      <span class="s">⚡ <span id="stock2">8</span> en stock</span>
+    </div>
+
+    <div class="delivery-box">🚚 Entrega estimada: 3-5 días hábiles · Envío gratis incluido</div>
+
+    <div class="option-group"><span class="option-label">Color:</span><div class="color-dots"><button class="cdot active" style="background:#6AABDF" title="Azul" onclick="selectColor(this,'Azul')"></button><span id="colorLabel" class="option-val">Azul</span></div></div>
+    
+
+    <ul class="features">
+      <li><span class="check">✓</span>🐾 Limpia las 4 patas en segundos</li>
+<li><span class="check">✓</span>💧 Solo necesitas agua — sin jabón necesario</li>
+<li><span class="check">✓</span>🌈 Cerdas de silicona suaves — no lastinan las patas</li>
+<li><span class="check">✓</span>🏃 Compacto y portátil — ideal para el paseo</li>
+<li><span class="check">✓</span>♻️ Fácil de limpiar y reutilizar</li>
+<li><span class="check">✓</span>✅ Color Azul · Envío gratis incluido</li>
+    </ul>
+
+    <div class="cta-group">
+      <button class="btn-main" onclick="addToCartAndGo()">🛒 Comprar ahora — $49.900 COP</button>
+      <a href="https://wa.me/573009848000?text=Hola!%20Me%20interesa%20el%20Limpiador%20Portátil%20de%20Patas%20para%20Mascotas" target="_blank" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Preguntar por WhatsApp
+      </a>
+      <div class="guarantee">
+        <span>🔒 Pago seguro</span>
+        <span>↩️ Garantía 15 días</span>
+        <span>🚚 Envío gratis</span>
+      </div>
+    </div>
+
+    <div class="payments">
+      <span>Pago seguro con:</span>
+      <span class="pay-badge" style="background:#1A2E1A;">WOMPI</span>
+      <span class="pay-badge" style="background:#1565C0;">PSE</span>
+      <span class="pay-badge" style="background:#1A1F71;">VISA</span>
+      <span class="pay-badge" style="background:#EB001B;">MC</span>
+      <span class="pay-badge" style="background:#FF6600;">AMEX</span>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof-section" id="resenas">
+  <h2>Lo que dicen nuestros <em>clientes</em></h2>
+  <p class="proof-sub">Reseñas reales de clientes colombianos</p>
+  <div class="reviews-grid" id="reviewsGrid">
+    <div style="text-align:center;padding:2rem;color:var(--muted);grid-column:1/-1;">Cargando reseñas...</div>
+  </div>
+  <div style="text-align:center;margin-top:2rem;">
+    <button onclick="openReviewForm()" style="background:var(--bark);color:white;border:none;padding:0.9rem 2rem;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;">✍️ Escribir reseña</button>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <h2>¿Cómo <em>funciona?</em></h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Elige y compra</h3><p>Selecciona tu opción y haz clic en "Comprar ahora". Pago 100% seguro.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Confirmación</h3><p>Recibes email de confirmación inmediatamente con los detalles de tu pedido.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Despacho</h3><p>Enviamos tu pedido con número de seguimiento. Rastreable en tiempo real.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Recíbelo</h3><p>Entrega en 3-5 días hábiles a cualquier ciudad de Colombia.</p></div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<section class="cta-bottom">
+  <h2>¿Listo para <em>comprarlo?</em></h2>
+  <p>Envío gratis · Garantía 15 días · Pago seguro · Solo quedan <span id="stockBottom">8</span> unidades</p>
+  <button class="btn-main" onclick="addToCartAndGo()">🛒 Comprar ahora — $49.900 COP</button>
+</section>
+
+<footer>
+  <a href="../" class="logo" style="font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:rgba(240,245,238,0.8);">pet<span style="color:#5BA55B;">Zen</span></a>
+  <span>© 2026 petZen · Manizales, Colombia</span>
+  <div style="display:flex;gap:1rem;">
+    <a href="../#faq">FAQ</a>
+    <a href="../#contacto">Contacto</a>
+    <a href="https://wa.me/573009848000">WhatsApp</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/573009848000" target="_blank" class="wa-float">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="wa-pulse"></div>
+<div class="toast" id="toast"></div>
+
+<!-- REVIEW FORM OVERLAY -->
+<div id="reviewOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:10000;overflow-y:auto;padding:2rem 1rem;">
+  <div style="max-width:500px;margin:2rem auto;background:white;padding:2rem;position:relative;border-radius:4px;">
+    <button onclick="closeReviewForm()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.4rem;cursor:pointer;">✕</button>
+    <h3 style="font-family:'Lora',serif;font-size:1.3rem;font-weight:700;margin-bottom:1rem;">Escribir reseña</h3>
+    <div class="star-picker" id="starPicker" style="display:flex;gap:0.3rem;margin-bottom:1rem;">
+      <span onclick="setRating(1)" style="font-size:1.8rem;cursor:pointer;color:#ddd;">★</span>
+      <span onclick="setRating(2)" style="font-size:1.8rem;cursor:pointer;color:#ddd;">★</span>
+      <span onclick="setRating(3)" style="font-size:1.8rem;cursor:pointer;color:#ddd;">★</span>
+      <span onclick="setRating(4)" style="font-size:1.8rem;cursor:pointer;color:#ddd;">★</span>
+      <span onclick="setRating(5)" style="font-size:1.8rem;cursor:pointer;color:#ddd;">★</span>
+    </div>
+    <input type="text" id="rAuthor" placeholder="Tu nombre" style="width:100%;padding:0.7rem;border:1.5px solid #ddd;font-family:'Nunito',sans-serif;font-size:0.88rem;margin-bottom:0.7rem;outline:none;">
+    <input type="text" id="rCity" placeholder="Ciudad" style="width:100%;padding:0.7rem;border:1.5px solid #ddd;font-family:'Nunito',sans-serif;font-size:0.88rem;margin-bottom:0.7rem;outline:none;">
+    <textarea id="rComment" rows="4" placeholder="Tu opinión..." style="width:100%;padding:0.7rem;border:1.5px solid #ddd;font-family:'Nunito',sans-serif;font-size:0.88rem;margin-bottom:0.7rem;outline:none;resize:vertical;"></textarea>
+    <button onclick="submitReview()" id="submitBtn" style="width:100%;background:var(--bark);color:white;border:none;padding:0.9rem;font-family:'Nunito',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:0.05em;">Publicar reseña</button>
+    <div id="reviewError" style="color:var(--red);font-size:0.8rem;margin-top:0.5rem;display:none;"></div>
+  </div>
+</div>
+
+<script>
+var PRODUCT_KEY = 'paw';
+var SUPABASE_URL = 'https://misdipzlaiewzrvsvcco.supabase.co';
+var SUPABASE_KEY = 'sb_publishable_M1yCi6E2EhG6N69TbOl-4Q_djeXAF0a';
+var images = ["petZen Images/Paw cleaner/1.png", "petZen Images/Paw cleaner/Screenshot_20260330-183147.png", "petZen Images/Paw cleaner/Screenshot_20260330-183208.png", "petZen Images/Paw cleaner/Screenshot_20260330-183218.png", "petZen Images/Paw cleaner/Screenshot_20260330-183226.png"];
+var video = null;
+var selectedRating = 0;
+
+// MEDIA
+function setImg(el) {
+  var wrap = document.getElementById('mainWrap');
+  wrap.innerHTML = '<img src="' + el.src + '" style="width:100%;height:100%;object-fit:contain;">';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+}
+function playVideo() {
+  if (!video) return;
+  var wrap = document.getElementById('mainWrap');
+  wrap.innerHTML = '<video src="../' + video + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+}
+
+// OPTIONS
+function selectColor(el, name) {
+  document.querySelectorAll('.cdot').forEach(function(d){ d.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('colorLabel').textContent = name;
+}
+function selectSize(el, name) {
+  document.querySelectorAll('.sbtn').forEach(function(b){ b.classList.remove('active'); });
+  el.classList.add('active');
+  document.getElementById('sizeLabel') && (document.getElementById('sizeLabel').textContent = name);
+}
+
+// CART → redirect to main store with product
+function addToCartAndGo() {
+  showToast('✅ Redirigiendo a la tienda...');
+  setTimeout(function(){ window.location.href = '../?add=' + PRODUCT_KEY; }, 800);
+}
+
+// URGENCY
+function rnd(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+function updateUrgency() {
+  var s = rnd(4,12), v = rnd(8,22);
+  document.getElementById('stockNum') && (document.getElementById('stockNum').textContent = s);
+  document.getElementById('stock2') && (document.getElementById('stock2').textContent = s);
+  document.getElementById('viewNum') && (document.getElementById('viewNum').textContent = v);
+  document.getElementById('stockBottom') && (document.getElementById('stockBottom').textContent = s);
+}
+updateUrgency();
+setInterval(updateUrgency, 8000);
+
+// TOAST
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+// REVIEWS
+var reviewColors = ['#F97316','#3A7A3A','#C084FC','#1565C0','#E05050','#5BA55B'];
+function starsText(n){ var s=''; for(var i=0;i<5;i++) s+=i<n?'★':'☆'; return s; }
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function loadReviews() {
+  fetch(SUPABASE_URL+'/rest/v1/reviews?select=*&product_key=eq.'+PRODUCT_KEY+'&order=created_at.desc&limit=6', {
+    headers: {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer '+SUPABASE_KEY}
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    var grid = document.getElementById('reviewsGrid');
+    if (!Array.isArray(data) || data.length === 0) {
+      grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--muted);grid-column:1/-1;">Aún no hay reseñas. ¡Sé el primero!</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    data.forEach(function(r, i) {
+      var initials = r.author.trim().split(' ').map(function(w){return w[0]||'';} ).join('').toUpperCase().slice(0,2)||'?';
+      var color = reviewColors[i % reviewColors.length];
+      var date = new Date(r.created_at).toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
+      var card = document.createElement('div');
+      card.className = 'review-card';
+      card.innerHTML = '<div class="review-stars">'+starsText(r.rating)+'</div><p class="review-text">"'+escHtml(r.comment)+'"</p><div class="review-author"><div class="review-avatar" style="background:'+color+';">'+initials+'</div><div><div class="review-name">'+escHtml(r.author)+'</div><div class="review-city">'+escHtml(r.city||'')+'</div></div></div>';
+      grid.appendChild(card);
+    });
+  })
+  .catch(function(){ document.getElementById('reviewsGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:1rem;color:var(--muted);">Error cargando reseñas.</div>'; });
+}
+loadReviews();
+
+// REVIEW FORM
+function openReviewForm(){ document.getElementById('reviewOverlay').style.display='block'; document.body.style.overflow='hidden'; }
+function closeReviewForm(){ document.getElementById('reviewOverlay').style.display='none'; document.body.style.overflow=''; }
+function setRating(n){
+  selectedRating = n;
+  document.querySelectorAll('#starPicker span').forEach(function(s,i){ s.style.color = i<n?'#F5A623':'#ddd'; });
+}
+async function submitReview() {
+  var author = document.getElementById('rAuthor').value.trim();
+  var city = document.getElementById('rCity').value.trim();
+  var comment = document.getElementById('rComment').value.trim();
+  var err = document.getElementById('reviewError');
+  var btn = document.getElementById('submitBtn');
+  err.style.display='none';
+  if (!selectedRating) { err.textContent='Selecciona una calificación.'; err.style.display='block'; return; }
+  if (!author) { err.textContent='Escribe tu nombre.'; err.style.display='block'; return; }
+  if (!comment) { err.textContent='Escribe tu opinión.'; err.style.display='block'; return; }
+  btn.disabled=true; btn.textContent='Publicando...';
+  try {
+    var res = await fetch(SUPABASE_URL+'/rest/v1/reviews', {
+      method:'POST',
+      headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body: JSON.stringify({product_key:PRODUCT_KEY, author:author, city:city, rating:selectedRating, comment:comment})
+    });
+    if (res.ok||res.status===201) {
+      closeReviewForm();
+      showToast('¡Gracias por tu reseña!');
+      loadReviews();
+    } else { throw new Error('Error '+res.status); }
+  } catch(e) {
+    err.textContent='Error al publicar. Intenta de nuevo.';
+    err.style.display='block';
+  }
+  btn.disabled=false; btn.textContent='Publicar reseña';
+}
+
+// Handle ?add= param from redirect
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  // nothing needed here, handled by main store
+})();
+</script>
+</body>
+</html>
