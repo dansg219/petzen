@@ -13,8 +13,8 @@
   --cream: #F0F5EE;
   --muted: #5A7055;
   --red: #E05050;
-  --accent: #EAB308;
-  --bg: #1A1A2E;
+  --accent: #5BA55B;
+  --bg: #E8F0E2;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -164,10 +164,10 @@ footer a:hover{color:white;}
 <div class="topbar">🚚 <span>Envío GRATIS</span> a todo Colombia · ↩️ Garantía 15 días · 🔒 Pago seguro</div>
 
 <nav class="nav">
-  <a href="../" class="logo">pet<span>Zen</span></a>
+  <a href="../index.html" class="logo">pet<span>Zen</span></a>
   <div class="nav-right">
-    <a href="../" class="back-link">← Ver todos los productos</a>
-    <button class="cart-btn" onclick="window.location.href='../#producto-estrella'">🛒 Tienda</button>
+    <a href="../index.html" class="back-link">← Ver todos los productos</a>
+    <button class="cart-btn" onclick="window.location.href='../index.html#producto-estrella'">🛒 Tienda</button>
   </div>
 </nav>
 
@@ -277,7 +277,7 @@ footer a:hover{color:white;}
 </section>
 
 <footer>
-  <a href="../" class="logo" style="font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:rgba(240,245,238,0.8);">pet<span style="color:#5BA55B;">Zen</span></a>
+  <a href="../index.html" class="logo" style="font-family:'Lora',serif;font-size:1.2rem;font-weight:700;color:rgba(240,245,238,0.8);">pet<span style="color:#5BA55B;">Zen</span></a>
   <span>© 2026 petZen · Manizales, Colombia</span>
   <div style="display:flex;gap:1rem;">
     <a href="../#faq">FAQ</a>
@@ -351,7 +351,7 @@ function selectSize(el, name) {
 // CART → redirect to main store with product
 function addToCartAndGo() {
   showToast('✅ Redirigiendo a la tienda...');
-  setTimeout(function(){ window.location.href = '../?add=' + PRODUCT_KEY; }, 800);
+  setTimeout(function(){ window.location.href = '../index.html?add=' + PRODUCT_KEY; }, 800);
 }
 
 // URGENCY
