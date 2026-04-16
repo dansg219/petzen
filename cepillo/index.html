@@ -329,11 +329,14 @@ function setImg(el) {
   el.classList.add('active');
 }
 function playVideo() {
-  if (!video) return;
+  clearInterval(slideTimer);
+  slideTimer = null;
+  isVideoPlaying = true;
   var wrap = document.getElementById('mainWrap');
-  wrap.innerHTML = '<video src="../' + video + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
-  document.querySelectorAll('.thumb,.vthumb').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+  wrap.innerHTML = '<video src="../petZen Images/Hair removal pet brush/video.mp4" controls autoplay muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
+  var vt = document.querySelector('.vthumb');
+  if (vt) vt.classList.add('active');
 }
 
 // OPTIONS
@@ -488,12 +491,11 @@ function playVideo() {
   clearInterval(slideTimer);
   slideTimer = null;
   isVideoPlaying = true;
-  var v = "";
-  if (!v) return;
   var wrap = document.getElementById('mainWrap');
-  wrap.innerHTML = '<video src="../' + v + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
+  wrap.innerHTML = '<video src="../petZen Images/Hair removal pet brush/video.mp4" controls autoplay muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
   document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
-  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+  var vt = document.querySelector('.vthumb');
+  if (vt) vt.classList.add('active');
 }
 
 // Add fade transition to main img

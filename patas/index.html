@@ -178,7 +178,8 @@ footer a:hover{color:white;}
       <img id="mainImg" src="../petZen Images/Paw cleaner/1.png" alt="Limpiador Portátil de Patas para Mascotas" onerror="this.style.display='none'">
     </div>
     <div class="thumbs" id="thumbsRow">
-      <img src="../petZen Images/Paw cleaner/1.png" class="thumb active" onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183147.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183208.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183218.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183226.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'">
+      <div class="vthumb active" onclick="playVideo()">▶</div>
+      <img src="../petZen Images/Paw cleaner/1.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183147.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183208.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183218.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'"><img src="../petZen Images/Paw cleaner/Screenshot_20260330-183226.png" class="thumb " onclick="setImg(this)" onerror="this.style.display='none'">
     </div>
   </div>
 
@@ -318,7 +319,7 @@ var PRODUCT_KEY = 'paw';
 var SUPABASE_URL = 'https://misdipzlaiewzrvsvcco.supabase.co';
 var SUPABASE_KEY = 'sb_publishable_M1yCi6E2EhG6N69TbOl-4Q_djeXAF0a';
 var images = ["petZen Images/Paw cleaner/1.png", "petZen Images/Paw cleaner/Screenshot_20260330-183147.png", "petZen Images/Paw cleaner/Screenshot_20260330-183208.png", "petZen Images/Paw cleaner/Screenshot_20260330-183218.png", "petZen Images/Paw cleaner/Screenshot_20260330-183226.png"];
-var video = null;
+var video = "petZen Images/Paw cleaner/video.mp4";
 var selectedRating = 0;
 
 // MEDIA
@@ -329,11 +330,14 @@ function setImg(el) {
   el.classList.add('active');
 }
 function playVideo() {
-  if (!video) return;
+  clearInterval(slideTimer);
+  slideTimer = null;
+  isVideoPlaying = true;
   var wrap = document.getElementById('mainWrap');
-  wrap.innerHTML = '<video src="../' + video + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
-  document.querySelectorAll('.thumb,.vthumb').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+  wrap.innerHTML = '<video src="../petZen Images/Paw cleaner/video.mp4" controls autoplay muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
+  document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
+  var vt = document.querySelector('.vthumb');
+  if (vt) vt.classList.add('active');
 }
 
 // OPTIONS
@@ -488,12 +492,11 @@ function playVideo() {
   clearInterval(slideTimer);
   slideTimer = null;
   isVideoPlaying = true;
-  var v = "";
-  if (!v) return;
   var wrap = document.getElementById('mainWrap');
-  wrap.innerHTML = '<video src="../' + v + '" controls autoplay muted style="width:100%;height:100%;object-fit:contain;"></video>';
+  wrap.innerHTML = '<video src="../petZen Images/Paw cleaner/video.mp4" controls autoplay muted playsinline style="width:100%;height:100%;object-fit:contain;"></video>';
   document.querySelectorAll('.thumb,.vthumb').forEach(function(t) { t.classList.remove('active'); });
-  document.querySelector('.vthumb') && document.querySelector('.vthumb').classList.add('active');
+  var vt = document.querySelector('.vthumb');
+  if (vt) vt.classList.add('active');
 }
 
 // Add fade transition to main img
