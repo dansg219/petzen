@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cepillo Depilador Automático — petZen</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Fraunces:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #FFFFFF;
+  --off: #F8F8F6;
+  --light: #F0F0EE;
+  --ink: #1A1A1A;
+  --mid: #6B6B6B;
+  --rose: #E8A0A0;
+  --rose-deep: #C96B6B;
+  --sage: #7BAE8A;
+  --sage-deep: #4A8C5C;
+  --gray: #9CA3AF;
+  --border: #E5E5E5;
+  --red: #DC3545;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Sora', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+/* ── ANN ── */
+.ann { background: var(--ink); color: white; text-align: center; padding: 0.5rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.ann strong { color: #A8D5B5; }
+
+/* ── NAV ── */
+nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 1rem 2.5rem; }
+.nav-logo { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--ink); }
+.nav-logo span { color: var(--sage-deep); }
+.nav-back { font-size: 0.75rem; color: var(--mid); text-decoration: none; font-weight: 600; }
+.nav-back:hover { color: var(--ink); }
+.nav-cta { background: var(--ink); color: white; border: none; padding: 0.65rem 1.4rem; font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; }
+.nav-cta:hover { background: var(--sage-deep); }
+
+/* ── HERO ── */
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: 100vh; background: var(--white); }
+
+/* LEFT — image */
+.hero-media {
+  background: var(--white);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 0; position: relative; overflow: hidden;
+}
+.hero-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(240,240,238,0.4) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none; z-index: 1;
+}
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  animation: riseIn 0.9s ease both;
+  transition: transform 0.6s ease;
+}
+.hero-img:hover { transform: scale(1.04); }
+@keyframes riseIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+.color-strip { display: flex; gap: 0.6rem; margin-top: 1.8rem; align-items: center; }
+.color-dot { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: border-color 0.2s, transform 0.2s; }
+.color-dot:hover, .color-dot.active { border-color: var(--ink); transform: scale(1.15); }
+.color-label { font-size: 0.72rem; font-weight: 600; color: var(--mid); margin-left: 0.4rem; }
+.thumbs-row { display: flex; gap: 0.5rem; margin-top: 1.2rem; }
+.thumb { width: 56px; height: 56px; object-fit: cover; border: none; cursor: pointer; opacity: 0.55; transition: all 0.2s; background: transparent; }
+.thumb:hover, .thumb.active { border: none; outline: 2px solid var(--sage-deep); outline-offset: 1px; opacity: 1; }
+.badge-sale { position: absolute; top: 1.5rem; left: 1.5rem; background: var(--red); color: white; padding: 0.5rem 0.8rem; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* RIGHT — info */
+.hero-info { display: flex; flex-direction: column; justify-content: center; padding: 3.5rem 3.5rem 3.5rem 2.5rem; animation: slideIn 0.9s 0.15s ease both; }
+@keyframes slideIn { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+.tag { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(123,174,138,0.12); color: var(--sage-deep); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 100px; margin-bottom: 0.9rem; width: fit-content; }
+.hero-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+.hero-title em { font-style: italic; color: var(--sage-deep); }
+.hero-stars { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.stars-val { color: #F59E0B; font-size: 0.95rem; letter-spacing: 0.05em; }
+.stars-count { font-size: 0.78rem; color: var(--mid); }
+.hero-desc { font-size: 0.93rem; color: var(--mid); line-height: 1.8; font-weight: 300; margin-bottom: 1.4rem; max-width: 40ch; }
+
+/* Features list */
+.features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.6rem; }
+.features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.85rem; color: var(--ink); }
+.feat-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(123,174,138,0.15); color: var(--sage-deep); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 800; flex-shrink: 0; margin-top: 0.1rem; }
+
+/* Price */
+.price-area { background: var(--off); border: 1px solid var(--border); padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
+.price-top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.3rem; }
+.price-main { font-family: 'Fraunces', serif; font-size: 2.4rem; font-weight: 700; line-height: 1; color: var(--ink); }
+.price-old { font-size: 1rem; text-decoration: line-through; color: var(--mid); }
+.price-badge { background: var(--red); color: white; font-size: 0.6rem; font-weight: 800; padding: 0.15rem 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.price-subs { display: flex; gap: 1rem; font-size: 0.75rem; color: var(--mid); flex-wrap: wrap; }
+
+/* Urgency */
+.urgency { display: flex; align-items: center; gap: 0.6rem; background: #FFF9F0; border: 1px solid #F59E0B; padding: 0.65rem 1rem; font-size: 0.78rem; font-weight: 600; color: #92400E; margin-bottom: 0.8rem; }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; animation: blink 1.4s infinite; }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(1.3);} }
+.live-row { display: flex; gap: 1.2rem; font-size: 0.75rem; font-weight: 600; margin-bottom: 1.2rem; }
+.live-v { color: var(--red); }
+.live-s { color: #D97706; }
+
+/* Buttons */
+.btn-primary { width: 100%; background: var(--ink); color: white; border: none; padding: 1.1rem; font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.22s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.7rem; }
+.btn-primary:hover { background: var(--sage-deep); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(74,140,92,0.3); }
+.btn-wa { width: 100%; background: #25D366; color: white; border: none; padding: 0.9rem; font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: background 0.2s; margin-bottom: 1rem; }
+.btn-wa:hover { background: #1da851; }
+.trust-row { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.7rem; color: var(--mid); font-weight: 500; margin-bottom: 1rem; }
+.trust-row span { display: flex; align-items: center; gap: 0.25rem; }
+.pay-row { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.pay-label { font-size: 0.62rem; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 0.06em; }
+.pay-chip { font-size: 0.58rem; font-weight: 800; padding: 0.18rem 0.45rem; color: white; border-radius: 2px; }
+
+/* ── SOCIAL PROOF BAR ── */
+.proof-bar { background: var(--ink); display: grid; grid-template-columns: repeat(4,1fr); text-align: center; }
+.proof-item { padding: 2rem 1rem; border-right: 1px solid rgba(255,255,255,0.08); }
+.proof-item:last-child { border-right: none; }
+.proof-num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 700; color: #A8D5B5; line-height: 1; }
+.proof-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; letter-spacing: 0.04em; }
+
+/* ── HOW ── */
+.how-section { padding: 5rem 3rem; background: var(--off); }
+.section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 0.6rem; text-align: center; }
+.section-title { font-family: 'Fraunces', serif; font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 700; text-align: center; margin-bottom: 3rem; line-height: 1.2; }
+.section-title em { font-style: italic; color: var(--sage-deep); }
+.how-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+.how-step { text-align: center; padding: 1.5rem 1rem; }
+.step-num { width: 52px; height: 52px; border-radius: 50%; background: white; border: 2px solid var(--sage-deep); color: var(--sage-deep); display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin: 0 auto 1rem; }
+.how-step h3 { font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+.how-step p { font-size: 0.8rem; color: var(--mid); line-height: 1.65; }
+
+/* ── BENEFITS ── */
+.bene-section { padding: 5rem 3rem; background: var(--white); }
+.bene-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.bene-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.bene-card { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem; border: 1px solid var(--border); background: var(--off); transition: border-color 0.2s, box-shadow 0.2s; }
+.bene-card:hover { border-color: var(--sage-deep); box-shadow: 0 4px 16px rgba(74,140,92,0.08); }
+.bene-icon { width: 42px; height: 42px; flex-shrink: 0; background: rgba(123,174,138,0.12); color: var(--sage-deep); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; border-radius: 8px; }
+.bene-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
+.bene-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.6; }
+.bene-visual { display: flex; flex-direction: column; gap: 0; overflow: hidden; border: 1px solid var(--border); }
+.bene-vis-item { padding: 1.5rem; border-bottom: 1px solid var(--border); background: white; }
+.bene-vis-item:last-child { border-bottom: none; }
+.bene-vis-num { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 700; color: var(--sage-deep); line-height: 1; }
+.bene-vis-label { font-size: 0.8rem; color: var(--mid); margin-top: 0.2rem; }
+
+/* ── REVIEWS ── */
+.rev-section { padding: 5rem 3rem; background: var(--off); }
+.rev-inner { max-width: 1040px; margin: 0 auto; }
+.rev-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; }
+.rev-avg { text-align: right; }
+.rev-avg-num { font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 700; color: var(--ink); line-height: 1; }
+.rev-avg-stars { color: #F59E0B; font-size: 1.1rem; }
+.rev-avg-sub { font-size: 0.75rem; color: var(--mid); }
+.rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-bottom: 2rem; }
+.rev-card { background: white; padding: 1.6rem; border: 1px solid var(--border); transition: box-shadow 0.2s, border-color 0.2s; }
+.rev-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-color: var(--sage-deep); }
+.rev-stars { color: #F59E0B; font-size: 0.82rem; margin-bottom: 0.7rem; }
+.rev-text { font-size: 0.85rem; color: var(--mid); line-height: 1.75; font-style: italic; margin-bottom: 1rem; }
+.rev-author { display: flex; align-items: center; gap: 0.7rem; }
+.rev-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.78rem; color: white; flex-shrink: 0; }
+.rev-name { font-weight: 700; font-size: 0.82rem; word-break: break-word; }
+.rev-city { font-size: 0.68rem; color: var(--mid); word-break: break-word; }
+.rev-bottom { display: flex; align-items: center; justify-content: space-between; background: white; border: 1px solid var(--border); padding: 1.2rem 1.5rem; }
+.write-btn { background: var(--ink); color: white; border: none; padding: 0.75rem 1.6rem; font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; }
+.write-btn:hover { background: var(--sage-deep); }
+
+/* ── FAQ ── */
+.faq-section { padding: 5rem 3rem; background: var(--white); }
+.faq-inner { max-width: 680px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { width: 100%; background: none; border: none; display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; cursor: pointer; font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--ink); text-align: left; }
+.faq-q .icon { color: var(--sage-deep); font-size: 1.2rem; transition: transform 0.3s; }
+.faq-q.open .icon { transform: rotate(45deg); }
+.faq-a { font-size: 0.85rem; color: var(--mid); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+.faq-a.open { max-height: 200px; padding-bottom: 1.1rem; }
+
+/* ── BOTTOM CTA ── */
+.bottom-cta { padding: 5rem 3rem; background: var(--ink); text-align: center; }
+.bottom-cta h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem,3vw,2.8rem); font-weight: 700; color: white; margin-bottom: 0.5rem; }
+.bottom-cta h2 em { font-style: italic; color: #A8D5B5; }
+.bottom-cta p { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin-bottom: 2rem; }
+.bottom-btn { background: white; color: var(--ink); border: none; padding: 1.1rem 3rem; font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+.bottom-btn:hover { background: #A8D5B5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+/* ── FOOTER ── */
+footer { background: #0A0A0A; padding: 1.8rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+footer .fl { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: white; text-decoration: none; }
+footer .fl span { color: #A8D5B5; }
+footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+footer a { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-decoration: none; margin-left: 1rem; }
+footer a:hover { color: #A8D5B5; }
+
+/* ── WA FLOAT ── */
+.wa-btn { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 9999; background: #25D366; border-radius: 50%; width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.45); text-decoration: none; transition: transform 0.2s; }
+.wa-btn:hover { transform: scale(1.1); }
+.wa-ring { position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 9998; width: 58px; height: 58px; border-radius: 50%; background: rgba(37,211,102,0.3); animation: ring 2s infinite; pointer-events: none; }
+@keyframes ring { 0%{transform:scale(1);opacity:.8;} 70%{transform:scale(1.7);opacity:0;} 100%{transform:scale(1.7);opacity:0;} }
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink); color: white; padding: 0.9rem 1.5rem; font-size: 0.83rem; font-weight: 600; z-index: 9999; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; border-radius: 2px; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── REVIEW OVERLAY ── */
+.rov { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; overflow-y: auto; padding: 2rem 1rem; }
+.rov-box { max-width: 480px; margin: 2rem auto; background: white; padding: 2.5rem; position: relative; }
+.rov-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.3rem; cursor: pointer; }
+.rov-box h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+.rov-box p { font-size: 0.82rem; color: var(--mid); margin-bottom: 1.2rem; }
+.sp { display: flex; gap: 0.3rem; margin-bottom: 1rem; }
+.sp span { font-size: 1.8rem; cursor: pointer; color: #ddd; line-height: 1; transition: color 0.15s; }
+.sp span.on { color: #F59E0B; }
+.ri { width: 100%; padding: 0.75rem 0.9rem; border: 1.5px solid var(--border); font-family: 'Sora', sans-serif; font-size: 0.85rem; color: var(--ink); outline: none; margin-bottom: 0.7rem; transition: border-color 0.2s; }
+.ri:focus { border-color: var(--sage-deep); }
+.rs { width: 100%; background: var(--ink); color: white; border: none; padding: 0.9rem; font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+.rs:hover { background: var(--sage-deep); }
+.rs:disabled { background: var(--mid); cursor: not-allowed; }
+.re { color: var(--red); font-size: 0.78rem; margin-top: 0.4rem; display: none; }
+
+
+/* ── QUANTITY ── */
+.qty-wrap { display: flex; align-items: center; gap: 0; margin-bottom: 1rem; }
+.qty-label { font-size: 0.78rem; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 0.08em; margin-right: 1rem; }
+.qty-btn { width: 38px; height: 38px; border: 1.5px solid var(--border); background: white; color: var(--ink); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-weight: 700; }
+.qty-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+.qty-num { width: 48px; height: 38px; border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border); border-left: none; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; background: white; }
+
+/* ── ACCORDION TABS ── */
+.acc-group { display: flex; flex-direction: column; margin-bottom: 1rem; border: 1px solid var(--border); }
+.acc-item { border-bottom: 1px solid var(--border); }
+.acc-item:last-child { border-bottom: none; }
+.acc-trigger {
+  width: 100%; background: white; border: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.1rem; cursor: pointer;
+  font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+  color: var(--ink); text-align: left;
+  transition: background 0.15s;
+}
+.acc-trigger:hover { background: var(--off); }
+.acc-trigger-left { display: flex; align-items: center; gap: 0.6rem; }
+.acc-trigger-icon { font-size: 1rem; }
+.acc-arrow { font-size: 0.9rem; color: var(--sage-deep); transition: transform 0.3s; flex-shrink: 0; }
+.acc-trigger.open .acc-arrow { transform: rotate(180deg); }
+.acc-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  background: var(--off);
+  font-size: 0.82rem; color: var(--mid); line-height: 1.75;
+  padding: 0 1.1rem;
+}
+.acc-body.open { max-height: 300px; padding: 0.9rem 1.1rem 1rem; }
+.acc-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.acc-body ul li { display: flex; align-items: flex-start; gap: 0.5rem; }
+.acc-body ul li::before { content: '✓'; color: var(--sage-deep); font-weight: 800; flex-shrink: 0; }
+
+
+
+/* ── TICKER ── */
+.ticker-wrap {
+  background: var(--sage-deep);
+  overflow: hidden;
+  padding: 0.6rem 0;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 22s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0 2.5rem;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: white;
+}
+.ticker-sep { color: rgba(255,255,255,0.4); font-size: 0.6rem; }
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-media { padding: 0; }
+  .hero-info { padding: 2rem 1.5rem; }
+  .proof-bar { grid-template-columns: 1fr 1fr; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+  .bene-inner { grid-template-columns: 1fr; }
+  .rev-grid { grid-template-columns: 1fr; }
+  .rev-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .how-section, .bene-section, .rev-section, .faq-section, .bottom-cta { padding: 3rem 1.5rem; }
+  .testimonials-grid { grid-template-columns: 1fr !important; }
+  .pain-grid { grid-template-columns: 1fr !important; }
+  .photo-test-grid { grid-template-columns: 1fr !important; }
+  .rev-name { white-space: normal; word-break: break-word; }
+  .rev-city { white-space: normal; word-break: break-word; }
+  nav { padding: 0.8rem 1.2rem; }
+  footer { flex-direction: column; text-align: center; padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="ann">🏷️ <strong>32% DE DESCUENTO</strong> hoy · 🚚 Envío GRATIS a todo Colombia · ↩️ Garantía 15 días · Solo <span id="annStock">8</span> unidades</div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">pet<span>Zen</span></a>
+  <div style="display:flex;align-items:center;gap:1.2rem;">
+    <a href="../index.html" class="nav-back">← Ver todos los productos</a>
+    <button class="nav-cta" onclick="scrollToCTA()">🛒 Comprar — $44.900</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <div class="badge-sale" style="z-index:10;">OFERTA 32% OFF</div>
+    <img id="mainImg" class="hero-img" src="../petZen Images/Hair removal pet brush/cepillo 1.png" alt="Cepillo Depilador" onerror="this.src='../cepillo_1.png'">
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 50%, transparent 100%);padding:1.5rem 2rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+    <div class="thumbs-row" id="thumbsRow">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 1.png" class="thumb active" onclick="setImg(this)" onerror="this.style.display='none'">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 2.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 3.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 4.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 5.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+      <img src="../petZen Images/Hair removal pet brush/cepillo 6.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+    </div>
+    </div>
+  </div>
+
+  <div class="hero-info">
+    <div class="tag">🏆 Producto Estrella · petZen</div>
+    <h1 class="hero-title">Cepillo Depilador<br>de <em>Acero Inoxidable</em></h1>
+    <div class="hero-stars">
+      <span class="stars-val">★★★★★</span>
+      <span class="stars-count">4.9 · +486 reseñas</span>
+    </div>
+    <p class="hero-desc">Elimina el pelo suelto de tu perro o gato en segundos. Un toque del botón y el pelo cae solo — sin ensuciarte las manos.</p>
+    <ul class="features">
+      <li><div class="feat-dot">✓</div><span><strong>Botón autolimpiante</strong> — el pelo cae solo con un toque</span></li>
+      <li><div class="feat-dot">✓</div><span><strong>Cerdas de acero inoxidable</strong> — resistentes y duraderas</span></li>
+      <li><div class="feat-dot">✓</div><span><strong>Agujas a 60°</strong> — no lastiman la piel de tu mascota</span></li>
+      <li><div class="feat-dot">✓</div><span><strong>Mango ergonómico</strong> antideslizante</span></li>
+      <li><div class="feat-dot">✓</div><span>Para <strong>perros y gatos</strong> de cualquier tamaño</span></li>
+    </ul>
+
+    <div class="price-area" id="ctaSection">
+      <div class="price-top">
+        <span class="price-main">$44.900</span>
+        <span class="price-old">$65.000</span>
+        <span class="price-badge">Ahorra $20.100</span>
+      </div>
+      <div class="price-subs">
+        <span>✅ En stock</span>
+        <span>🚚 Envío gratis incluido</span>
+      </div>
+    </div>
+
+    <div class="urgency">
+      <div class="pulse"></div>
+      ¡Solo quedan <strong>&nbsp;<span id="stockNum">8</span>&nbsp;</strong> unidades disponibles
+    </div>
+    <div class="live-row">
+      <span class="live-v">👁 <span id="viewNum">14</span> personas viendo ahora</span>
+      <span class="live-s">⚡ <span id="stock2">8</span> en stock</span>
+    </div>
+
+    <!-- QUANTITY -->
+    <div class="qty-wrap">
+      <span class="qty-label">Cantidad</span>
+      <button class="qty-btn" onclick="changeQty(-1)">−</button>
+      <div class="qty-num" id="qtyNum">1</div>
+      <button class="qty-btn" onclick="changeQty(1)">+</button>
+    </div>
+
+    <button class="btn-primary" onclick="addToCartAndGo()">🛒 Agregar al carrito — $44.900 COP</button>
+    <a href="https://wa.me/573009848000?text=Hola!%20Me%20interesa%20el%20Cepillo%20Depilador" target="_blank" class="btn-wa">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Preguntar por WhatsApp
+    </a>
+    <!-- MINI REVIEWS -->
+    <div style="display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1rem;">
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=40&h=40&fit=crop&q=30" width="36" height="36" style="border-radius:50%;flex-shrink:0;object-fit:cover;" alt="Valentina R.">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Valentina R.</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Mi golden retriever quedó como recién bañado. El botón autolimpiante es una maravilla."</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <img src="https://em-content.zobj.net/source/apple/354/red-heart_2764-fe0f.png" width="36" height="36" style="border-radius:50%;flex-shrink:0;object-fit:cover;background:#fff0f0;" alt="Carlos M.">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Carlos M. · Medellín</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Lo compré para mis dos gatos. Llegó rápido y funciona perfecto. 100% recomendado."</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=40&h=40&fit=crop&q=30" width="36" height="36" style="border-radius:50%;flex-shrink:0;object-fit:cover;" alt="Laura P.">
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Laura P. · Bogotá</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Nunca había visto algo así. Mi perro se queda quieto todo el tiempo que lo cepillo."</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACCORDION TABS -->
+    <div class="acc-group">
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🏷️</span> Descuento y oferta</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin-bottom:0.6rem;">Aprovecha nuestra <strong>oferta de lanzamiento</strong> con el 32% de descuento:</p>
+          <ul>
+            <li>Precio normal: <span style="text-decoration:line-through;color:#aaa;">$65.000 COP</span></li>
+            <li>Precio oferta: <strong style="color:var(--sage-deep);">$44.900 COP</strong></li>
+            <li>Ahorras $20.100 COP en esta compra</li>
+            <li>Oferta válida mientras dure el stock disponible</li>
+            <li>Envío gratis incluido en el precio</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🛡️</span> Garantía 15 días</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin-bottom:0.6rem;">Tu compra está <strong>100% protegida</strong>. Si no quedas satisfecho:</p>
+          <ul>
+            <li>Tienes 15 días desde que recibes el producto</li>
+            <li>Reembolso completo o producto nuevo sin costo</li>
+            <li>Sin preguntas difíciles, sin trámites complicados</li>
+            <li>Solo escríbenos a soportepetzen@gmail.com</li>
+            <li>Cubre defectos de fabricación y producto incorrecto</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🚚</span> Información de envío</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Envío gratis a todo Colombia — sin costo adicional</li>
+            <li>Entrega estimada: 3-5 días hábiles</li>
+            <li>Recibes número de seguimiento por email</li>
+            <li>Enviamos a todas las ciudades y municipios</li>
+            <li>Procesamos tu pedido en 24 horas hábiles</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="trust-row">
+      <span>🔒 Pago seguro</span><span>🚚 Envío gratis</span><span>↩️ Garantía 15 días</span>
+    </div>
+    <div class="pay-row">
+      <span class="pay-label">Acepta:</span>
+      <span class="pay-chip" style="background:#1A2E1A;">WOMPI</span>
+      <span class="pay-chip" style="background:#1565C0;">PSE</span>
+      <span class="pay-chip" style="background:#1A1F71;">VISA</span>
+      <span class="pay-chip" style="background:#EB001B;">MC</span>
+      <span class="pay-chip" style="background:#FF6600;">AMEX</span>
+    </div>
+  </div>
+</section>
+<!-- PAIN SECTION -->
+<section style="background:var(--white);padding:0;">
+<div style="background:var(--white);padding:2.5rem 1.5rem 2.5rem;">
+<div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.4rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:0.5rem;">El problema</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;">¿Cansado del pelo <em style="font-style:italic;color:var(--sage-deep);">acumulado?</em></h2>
+      <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:42ch;margin:0 auto;">El cepillado termina siendo más trabajo que solución.</p>
+    </div>
+    <div class="pain-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pierdes tiempo limpiando el cepillo</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Tienes que quitar el pelo a mano después de cada sesión.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">El pelo se queda atrapado</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Los cepillos normales dejan de funcionar a los pocos minutos.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.15);border-left:3px solid var(--sage-deep);">
+          <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+          <div style="font-size:0.78rem;color:var(--ink);line-height:1.55;"><strong>La solución:</strong> un toque del botón y el pelo cae solo en segundos.</div>
+        </div>
+      </div>
+      <div>
+        <img src="cepillo3.png" alt="Depilación sencilla"
+             style="width:100%;height:auto;display:block;border-radius:4px;"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ANTES / DESPUÉS SECTION -->
+<section style="background:var(--off);padding:0;">
+<div style="padding:2.5rem 1.5rem 2.5rem;">
+<div style="max-width:900px;margin:0 auto;">
+  <div style="text-align:center;margin-bottom:1.4rem;">
+    <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:0.5rem;">Transformación real</div>
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;">Antes y después de usar el <em style="font-style:italic;color:var(--sage-deep);">cepillo</em></h2>
+    <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:42ch;margin:0 auto;">El resultado habla solo. Mira la diferencia en minutos.</p>
+  </div>
+  <div class="pain-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+
+    <div style="display:flex;flex-direction:column;gap:0.65rem;">
+
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--rose-deep);margin-top:0.2rem;">Antes</div>
+
+      <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+        <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+        <div>
+          <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pelaje desaliñado y lleno de nudos</div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">El pelo muerto se acumula y se ve opaco y sin vida.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+        <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+        <div>
+          <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pelo suelto por toda la casa</div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">En muebles, ropa y pisos — imposible de controlar.</div>
+        </div>
+      </div>
+
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-deep);margin-top:0.6rem;">Después</div>
+
+      <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.1);border-left:3px solid var(--sage-deep);">
+        <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+        <div>
+          <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pelaje pulido, suave y brillante</div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Sin enredos, sin pelo muerto. Tu mascota se ve y se siente mejor.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.1);border-left:3px solid var(--sage-deep);">
+        <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+        <div>
+          <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pelo eliminado fácilmente con un toque</div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Presiona el botón y el cepillo queda limpio en segundos.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div>
+      <img src="../petZen Images/Hair removal pet brush/cepillo6.png" alt="Antes y después del cepillo"
+           style="width:100%;height:auto;display:block;border-radius:4px;"
+           onerror="this.style.display='none'">
+    </div>
+
+  </div>
+</div>
+</div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section style="background:var(--white);padding:3.5rem 1.5rem;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.8rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:0.5rem;">¿Por qué elegirnos?</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;">petZen vs <em style="font-style:italic;color:var(--mid);">el resto</em></h2>
+    </div>
+
+    <div style="border:1px solid var(--border);overflow:hidden;background:white;">
+
+      <!-- Header -->
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--ink);">
+        <div style="padding:0.9rem 1rem;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);">Característica</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid rgba(255,255,255,0.1);background:rgba(123,174,138,0.15);">
+          <div style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:white;">pet<span style="color:#A8D5B5;">Zen</span></div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.15rem;">Nuestra marca</div>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:0.9rem;font-weight:700;color:rgba(255,255,255,0.4);">Otros</div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.25);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.15rem;">La competencia</div>
+        </div>
+      </div>
+
+      <!-- Rows -->
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Botón autolimpiante</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Agujas acero inoxidable</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Puntas redondeadas 60°</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Mango ergonómico antideslizante</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Tamaño ideal (10.4 × 19.3 cm)</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:0.75rem;color:var(--mid);font-weight:600;">Varía</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Envío gratis a Colombia</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Garantía 15 días</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Soporte en Colombia</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
+<!-- PHOTO TESTIMONIALS -->
+<section style="background:var(--off);padding:4rem 1.5rem;">
+  <div style="max-width:960px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:0.5rem;">Clientes reales · Fotos reales</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;">Ellos ya lo <em style="font-style:italic;color:var(--sage-deep);">comprobaron</em></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;" class="photo-test-grid">
+
+      <!-- 1 — cepillando gato negro/blanco en cama -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato1.png" alt="Cliente cepillando su gato" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Mi gato se deja cepillar por primera vez. Las puntas redondeadas lo relajan en vez de asustarlo. ¡Increíble!"</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">SM</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Sara M.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Bogotá · gato doméstico</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — cepillando en el piso -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato2.png" alt="Sesión de cepillado en el piso" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Se queda tumbado y no se mueve. Antes huía apenas veía el cepillo. Ahora lo espera quieto."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">JP</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Juan P.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Medellín · 2 gatos en casa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — cepillo con pelo recogido, gato negro al fondo -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato3.png" alt="Resultado después de cepillar" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Una sola pasada y ya el cepillo recoge así. No puedo creer cuánto pelo suelto tenía mi gato encima."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">LG</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Lorena G.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Cali · gato negro pelo corto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — cepillo lleno de pelo -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato4.png" alt="Cepillo lleno de pelo recogido" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Todo ese pelo estaba en mi sofá. Ahora queda en el cepillo y lo boto con un clic. Mi casa cambió completamente."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#1565C0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">AM</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Alejandra M.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Barranquilla · gato persa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — botón limpiador, vista trasera -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato5.png" alt="Botón autolimpiante del cepillo" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El botón del frente expulsa todo el pelo sin ensuciarte. Es lo más práctico que he comprado para mis mascotas."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#6B4F9E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">CR</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Camila R.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Pereira · gato y perro</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 — cepillo lleno, fondo madera -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato6.png" alt="Resultado visible tras cepillar" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Eso es de una sola sesión. Mi gata tiene pelo largo y antes yo terminaba con pelo en toda la ropa. Ya no más."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#4A8C5C;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">DV</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Diana V.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Bucaramanga · gata angora</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 — mango texturizado en mano -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato7.png" alt="Mango ergonómico antideslizante" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El mango no resbala nada. Cepillo a mi gata 10 minutos seguidos y la mano no se cansa. El diseño es muy bueno."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">MO</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">María O.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Manizales · gata siamesa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 — cepillo lleno de pelo, al aire libre -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato8.png" alt="Cepillo usado al aire libre" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Lo uso en el patio para que el pelo vuele lejos. Funciona igual de bien afuera. Muy resistente y fácil de limpiar."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">FH</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Felipe H.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Armenia · perro y gato</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 — agujas de acero closeup -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato9.png" alt="Agujas de acero inoxidable de cerca" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Las puntas redondeadas son reales, no publicidad. Mi gato no se queja nada. Calidad muy superior a los que había probado antes."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">NT</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Natalia T.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Cúcuta · gato pelo corto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>¿Listo para un hogar sin <em>pelo por todas partes?</em></h2>
+  <p>Más de 486 dueños de mascotas ya lo comprobaron · Envío gratis · Garantía 15 días</p>
+  <button class="bottom-btn" onclick="addToCartAndGo()">🛒 Comprar ahora — $44.900 COP</button>
+  <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;flex-wrap:wrap;">
+    <span style="font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;">Pago seguro:</span>
+    <span class="pay-chip" style="background:#1A2E1A;">WOMPI</span>
+    <span class="pay-chip" style="background:#1565C0;">PSE</span>
+    <span class="pay-chip" style="background:#1A1F71;">VISA</span>
+    <span class="pay-chip" style="background:#EB001B;">MC</span>
+  </div>
+</section>
+
+<footer>
+  <a href="../index.html" class="fl">pet<span>Zen</span></a>
+  <p>© 2026 petZen · Manizales, Colombia</p>
+  <div>
+    <a href="../index.html#faq">FAQ</a>
+    <a href="../index.html#contacto">Contacto</a>
+    <a href="https://wa.me/573009848000">WhatsApp</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/573009848000" target="_blank" class="wa-btn">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="wa-ring"></div>
+<div class="toast" id="toast"></div>
+
+<!-- REVIEW OVERLAY -->
+<div class="rov" id="rov" onclick="if(event.target===this)closeROV()">
+  <div class="rov-box">
+    <button class="rov-close" onclick="closeROV()">✕</button>
+    <h3>Escribir reseña</h3>
+    <p>Tu opinión ayuda a otros dueños de mascotas</p>
+    <div class="sp" id="sp">
+      <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span>
+      <span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span>
+      <span onclick="setRating(5)">★</span>
+    </div>
+    <input type="text" class="ri" id="rAuthor" placeholder="Tu nombre">
+    <input type="text" class="ri" id="rCity" placeholder="Ciudad">
+    <textarea class="ri" id="rComment" rows="4" placeholder="Tu experiencia con el producto..."></textarea>
+    <button class="rs" id="rs" onclick="submitReview()">Publicar reseña</button>
+    <div class="re" id="re"></div>
+  </div>
+</div>
+
+<script>
+var SB_URL = 'https://misdipzlaiewzrvsvcco.supabase.co';
+var SB_KEY = 'sb_publishable_M1yCi6E2EhG6N69TbOl-4Q_djeXAF0a';
+var PKEY = 'brush';
+var rating = 0;
+var colors = ['#C8A96E','#4A8C5C','#C94040','#1565C0','#8B7355','#6B4F9E'];
+
+// Image
+function setImg(el) {
+  document.getElementById('mainImg').src = el.src;
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+// Color
+function selectColor(el, name) {
+  document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('colorLabel').textContent = name;
+}
+// Auto slideshow
+var slides = ['../petZen Images/Hair removal pet brush/cepillo 1.png','../petZen Images/Hair removal pet brush/cepillo 2.png','../petZen Images/Hair removal pet brush/cepillo 3.png','../petZen Images/Hair removal pet brush/cepillo 4.png','../petZen Images/Hair removal pet brush/cepillo 5.png','../petZen Images/Hair removal pet brush/cepillo 6.png'];
+var si = 0;
+var imgEl = document.getElementById('mainImg');
+imgEl.style.transition = 'opacity 0.3s';
+setInterval(function(){
+  si = (si+1) % slides.length;
+  imgEl.style.opacity='0';
+  setTimeout(function(){ imgEl.src=slides[si]; imgEl.style.opacity='1'; var th=document.querySelectorAll('.thumb'); th.forEach((t,i)=>t.classList.toggle('active',i===si)); }, 300);
+}, 3200);
+// Urgency
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function upd(){
+  var s=rnd(4,12),v=rnd(7,22);
+  ['stockNum','stock2','annStock'].forEach(id=>{var e=document.getElementById(id);if(e)e.textContent=s;});
+  var ve=document.getElementById('viewNum');if(ve)ve.textContent=v;
+}
+upd(); setInterval(upd,8000);
+function scrollToCTA(){ document.getElementById('ctaSection').scrollIntoView({behavior:'smooth',block:'center'}); }
+function addToCartAndGo(){ showToast('✅ Redirigiendo...'); setTimeout(()=>{ window.location.href='../index.html?add=brush'; },800); }
+function showToast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+function toggleFaq(btn){ var a=btn.nextElementSibling; var o=a.classList.contains('open'); document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open')); document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open')); if(!o){a.classList.add('open');btn.classList.add('open');} }
+// Reviews
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function stars(n){var s='';for(var i=0;i<5;i++)s+=i<n?'★':'☆';return s;}
+function loadReviews(){
+  fetch(SB_URL+'/rest/v1/reviews?select=*&product_key=eq.'+PKEY+'&order=created_at.desc&limit=6',{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
+  .then(r=>r.json()).then(data=>{
+    var g=document.getElementById('reviewsGrid');
+    if(!Array.isArray(data)||data.length===0){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--mid);">¡Sé el primero en opinar! ✍️</div>';return;}
+    var avg=data.reduce((s,r)=>s+r.rating,0)/data.length;
+    document.getElementById('avgScore').textContent=avg.toFixed(1);
+    document.getElementById('avgCount').textContent=data.length+' reseñas';
+    g.innerHTML='';
+    data.forEach((r,i)=>{
+      var init=r.author.trim().split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2)||'?';
+      var c=colors[i%colors.length];
+      var d=new Date(r.created_at).toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
+      var card=document.createElement('div'); card.className='rev-card';
+      card.innerHTML='<div class="rev-stars">'+stars(r.rating)+'</div><p class="rev-text">"'+esc(r.comment)+'"</p><div class="rev-author"><div class="rev-avatar" style="background:'+c+';">'+init+'</div><div><div class="rev-name">'+esc(r.author)+'</div><div class="rev-city">'+esc(r.city||'')+'</div><div style="font-size:0.65rem;color:var(--mid);margin-top:0.1rem;">'+d+'</div></div></div>';
+      g.appendChild(card);
+    });
+  }).catch(()=>{document.getElementById('reviewsGrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--mid);">¡Sé el primero en opinar! ✍️</div>';});
+}
+loadReviews();
+function openROV(){document.getElementById('rov').style.display='block';document.body.style.overflow='hidden';}
+function closeROV(){document.getElementById('rov').style.display='none';document.body.style.overflow='';}
+function setRating(n){rating=n;document.querySelectorAll('#sp span').forEach((s,i)=>s.classList.toggle('on',i<n));}
+async function submitReview(){
+  var a=document.getElementById('rAuthor').value.trim(),c=document.getElementById('rCity').value.trim(),cm=document.getElementById('rComment').value.trim();
+  var e=document.getElementById('re'),b=document.getElementById('rs');
+  e.style.display='none';
+  if(!rating){e.textContent='Selecciona calificación.';e.style.display='block';return;}
+  if(!a){e.textContent='Escribe tu nombre.';e.style.display='block';return;}
+  if(!cm){e.textContent='Escribe tu opinión.';e.style.display='block';return;}
+  b.disabled=true;b.textContent='Publicando...';
+  try{
+    var r=await fetch(SB_URL+'/rest/v1/reviews',{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({product_key:PKEY,author:a,city:c,rating,comment:cm})});
+    if(r.ok||r.status===201){closeROV();showToast('¡Gracias por tu reseña!');loadReviews();}
+    else throw new Error();
+  }catch(err){e.textContent='Error al publicar.';e.style.display='block';}
+  b.disabled=false;b.textContent='Publicar reseña';
+}
+// Scroll animations
+// Quantity
+var qty = 1;
+function changeQty(d) {
+  qty = Math.max(1, Math.min(10, qty + d));
+  document.getElementById('qtyNum').textContent = qty;
+}
+
+// Accordion
+function toggleAcc(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.acc-trigger').forEach(b => b.classList.remove('open'));
+  // Open clicked if it was closed
+  if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+}
+
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.how-step,.bene-card,.rev-card,.bene-vis-item,.proof-item').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.55s ease, transform 0.55s ease';obs.observe(el);});
+</script>
+</body>
+</html>
