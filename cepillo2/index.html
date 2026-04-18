@@ -38,13 +38,31 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97)
 .nav-cta:hover { background: var(--sage-deep); }
 
 /* ── HERO ── */
-.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: 90vh; background: var(--white); }
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: 100vh; background: var(--white); }
 
 /* LEFT — image */
-.hero-media { background: var(--off); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; position: relative; overflow: hidden; }
-.hero-media::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(123,174,138,0.12) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
-.hero-img { width: 85%; max-width: 420px; filter: drop-shadow(0 24px 48px rgba(0,0,0,0.1)); animation: riseIn 0.9s ease both; transition: transform 0.4s ease; }
-.hero-img:hover { transform: scale(1.03); }
+.hero-media {
+  background: var(--white);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 0; position: relative; overflow: hidden;
+}
+.hero-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(240,240,238,0.4) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none; z-index: 1;
+}
+.hero-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  animation: riseIn 0.9s ease both;
+  transition: transform 0.6s ease;
+  flex: 1;
+}
+.hero-img:hover { transform: scale(1.04); }
 @keyframes riseIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 .color-strip { display: flex; gap: 0.6rem; margin-top: 1.8rem; align-items: center; }
 .color-dot { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2.5px solid transparent; transition: border-color 0.2s, transform 0.2s; }
@@ -202,6 +220,70 @@ footer a:hover { color: #A8D5B5; }
 .rs:disabled { background: var(--mid); cursor: not-allowed; }
 .re { color: var(--red); font-size: 0.78rem; margin-top: 0.4rem; display: none; }
 
+
+/* ── QUANTITY ── */
+.qty-wrap { display: flex; align-items: center; gap: 0; margin-bottom: 1rem; }
+.qty-label { font-size: 0.78rem; font-weight: 700; color: var(--mid); text-transform: uppercase; letter-spacing: 0.08em; margin-right: 1rem; }
+.qty-btn { width: 38px; height: 38px; border: 1.5px solid var(--border); background: white; color: var(--ink); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-weight: 700; }
+.qty-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+.qty-num { width: 48px; height: 38px; border-top: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border); border-left: none; border-right: none; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; background: white; }
+
+/* ── ACCORDION TABS ── */
+.acc-group { display: flex; flex-direction: column; margin-bottom: 1rem; border: 1px solid var(--border); }
+.acc-item { border-bottom: 1px solid var(--border); }
+.acc-item:last-child { border-bottom: none; }
+.acc-trigger {
+  width: 100%; background: white; border: none;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 1.1rem; cursor: pointer;
+  font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700;
+  color: var(--ink); text-align: left;
+  transition: background 0.15s;
+}
+.acc-trigger:hover { background: var(--off); }
+.acc-trigger-left { display: flex; align-items: center; gap: 0.6rem; }
+.acc-trigger-icon { font-size: 1rem; }
+.acc-arrow { font-size: 0.9rem; color: var(--sage-deep); transition: transform 0.3s; flex-shrink: 0; }
+.acc-trigger.open .acc-arrow { transform: rotate(180deg); }
+.acc-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  background: var(--off);
+  font-size: 0.82rem; color: var(--mid); line-height: 1.75;
+  padding: 0 1.1rem;
+}
+.acc-body.open { max-height: 300px; padding: 0.9rem 1.1rem 1rem; }
+.acc-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.acc-body ul li { display: flex; align-items: flex-start; gap: 0.5rem; }
+.acc-body ul li::before { content: '✓'; color: var(--sage-deep); font-weight: 800; flex-shrink: 0; }
+
+
+
+/* ── TICKER ── */
+.ticker-wrap {
+  background: var(--sage-deep);
+  overflow: hidden;
+  padding: 0.6rem 0;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker 22s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0 2.5rem;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: white;
+}
+.ticker-sep { color: rgba(255,255,255,0.4); font-size: 0.6rem; }
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -213,6 +295,8 @@ footer a:hover { color: #A8D5B5; }
   .rev-grid { grid-template-columns: 1fr; }
   .rev-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .how-section, .bene-section, .rev-section, .faq-section, .bottom-cta { padding: 3rem 1.5rem; }
+  .testimonials-grid { grid-template-columns: 1fr !important; }
+  .pain-grid { grid-template-columns: 1fr !important; }
   nav { padding: 0.8rem 1.2rem; }
   footer { flex-direction: column; text-align: center; padding: 1.5rem; }
 }
@@ -220,7 +304,7 @@ footer a:hover { color: #A8D5B5; }
 </head>
 <body>
 
-<div class="ann">🚚 <strong>Envío GRATIS</strong> a todo Colombia · ↩️ Garantía 15 días · Solo <span id="annStock">8</span> unidades</div>
+<div class="ann">🏷️ <strong>32% DE DESCUENTO</strong> hoy · 🚚 Envío GRATIS a todo Colombia · ↩️ Garantía 15 días · Solo <span id="annStock">8</span> unidades</div>
 
 <nav>
   <a href="../index.html" class="nav-logo">pet<span>Zen</span></a>
@@ -233,9 +317,10 @@ footer a:hover { color: #A8D5B5; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-media">
-    <div class="badge-sale">OFERTA 32% OFF</div>
+    <div class="badge-sale" style="z-index:10;">OFERTA 32% OFF</div>
     <img id="mainImg" class="hero-img" src="../petZen Images/Hair removal pet brush/cepillo 1.png" alt="Cepillo Depilador" onerror="this.src='../cepillo_1.png'">
-    <div class="color-strip">
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 50%, transparent 100%);padding:1.5rem 2rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+    <div class="color-strip" style="margin-top:0;">
       <span style="font-size:0.72rem;font-weight:600;color:var(--mid);">Color:</span>
       <div class="color-dot active" style="background:#9CA3AF;" title="Gris" onclick="selectColor(this,'Gris')"></div>
       <div class="color-dot" style="background:#F9A8D4;" title="Rosa" onclick="selectColor(this,'Rosa')"></div>
@@ -250,6 +335,7 @@ footer a:hover { color: #A8D5B5; }
       <img src="../petZen Images/Hair removal pet brush/cepillo 4.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
       <img src="../petZen Images/Hair removal pet brush/cepillo 5.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
       <img src="../petZen Images/Hair removal pet brush/cepillo 6.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
+    </div>
     </div>
   </div>
 
@@ -290,11 +376,112 @@ footer a:hover { color: #A8D5B5; }
       <span class="live-s">⚡ <span id="stock2">8</span> en stock</span>
     </div>
 
+    <!-- QUANTITY -->
+    <div class="qty-wrap">
+      <span class="qty-label">Cantidad</span>
+      <button class="qty-btn" onclick="changeQty(-1)">−</button>
+      <div class="qty-num" id="qtyNum">1</div>
+      <button class="qty-btn" onclick="changeQty(1)">+</button>
+    </div>
+
     <button class="btn-primary" onclick="addToCartAndGo()">🛒 Agregar al carrito — $44.900 COP</button>
     <a href="https://wa.me/573009848000?text=Hola!%20Me%20interesa%20el%20Cepillo%20Depilador" target="_blank" class="btn-wa">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Preguntar por WhatsApp
     </a>
+    <!-- MINI REVIEWS -->
+    <div style="display:flex;flex-direction:column;gap:0.55rem;margin-bottom:1rem;">
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <div style="width:36px;height:36px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78rem;color:white;flex-shrink:0;">VR</div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Valentina R.</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Mi golden retriever quedó como recién bañado. El botón autolimpiante es una maravilla."</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <div style="width:36px;height:36px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78rem;color:white;flex-shrink:0;">CM</div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Carlos M. · Medellín</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Lo compré para mis dos gatos. Llegó rápido y funciona perfecto. 100% recomendado."</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.9rem;background:var(--off);border:1px solid var(--border);">
+        <div style="width:36px;height:36px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.78rem;color:white;flex-shrink:0;">LP</div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.15rem;">
+            <span style="font-size:0.8rem;font-weight:700;">Laura P. · Bogotá</span>
+            <span style="color:#F59E0B;font-size:0.75rem;letter-spacing:0.05em;">★★★★★</span>
+          </div>
+          <div style="font-size:0.75rem;color:var(--mid);line-height:1.4;font-style:italic;">"Nunca había visto algo así. Mi perro se queda quieto todo el tiempo que lo cepillo."</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ACCORDION TABS -->
+    <div class="acc-group">
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🏷️</span> Descuento y oferta</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin-bottom:0.6rem;">Aprovecha nuestra <strong>oferta de lanzamiento</strong> con el 32% de descuento:</p>
+          <ul>
+            <li>Precio normal: <span style="text-decoration:line-through;color:#aaa;">$65.000 COP</span></li>
+            <li>Precio oferta: <strong style="color:var(--sage-deep);">$44.900 COP</strong></li>
+            <li>Ahorras $20.100 COP en esta compra</li>
+            <li>Oferta válida mientras dure el stock disponible</li>
+            <li>Envío gratis incluido en el precio</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🛡️</span> Garantía 15 días</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <p style="margin-bottom:0.6rem;">Tu compra está <strong>100% protegida</strong>. Si no quedas satisfecho:</p>
+          <ul>
+            <li>Tienes 15 días desde que recibes el producto</li>
+            <li>Reembolso completo o producto nuevo sin costo</li>
+            <li>Sin preguntas difíciles, sin trámites complicados</li>
+            <li>Solo escríbenos a soportepetzen@gmail.com</li>
+            <li>Cubre defectos de fabricación y producto incorrecto</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)">
+          <span class="acc-trigger-left"><span class="acc-trigger-icon">🚚</span> Información de envío</span>
+          <span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <ul>
+            <li>Envío gratis a todo Colombia — sin costo adicional</li>
+            <li>Entrega estimada: 3-5 días hábiles</li>
+            <li>Recibes número de seguimiento por email</li>
+            <li>Enviamos a todas las ciudades y municipios</li>
+            <li>Procesamos tu pedido en 24 horas hábiles</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
     <div class="trust-row">
       <span>🔒 Pago seguro</span><span>🚚 Envío gratis</span><span>↩️ Garantía 15 días</span>
     </div>
@@ -308,85 +495,414 @@ footer a:hover { color: #A8D5B5; }
     </div>
   </div>
 </section>
-
-<!-- PROOF BAR -->
-<div class="proof-bar">
-  <div class="proof-item"><div class="proof-num">486</div><div class="proof-label">Clientes satisfechos</div></div>
-  <div class="proof-item"><div class="proof-num">4.9★</div><div class="proof-label">Calificación promedio</div></div>
-  <div class="proof-item"><div class="proof-num">30s</div><div class="proof-label">Para depilar completamente</div></div>
-  <div class="proof-item"><div class="proof-num">15d</div><div class="proof-label">Garantía sin preguntas</div></div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="how-section">
-  <div class="section-label">Proceso de compra</div>
-  <h2 class="section-title">En 4 pasos tienes tu pedido <em>en casa</em></h2>
-  <div class="how-steps">
-    <div class="how-step"><div class="step-num">1</div><h3>Elige y paga</h3><p>Clic en "Agregar al carrito" y completa el pago seguro con tarjeta o PSE a través de Wompi.</p></div>
-    <div class="how-step"><div class="step-num">2</div><h3>Confirmación</h3><p>Recibes un email de confirmación inmediato con todos los detalles de tu pedido.</p></div>
-    <div class="how-step"><div class="step-num">3</div><h3>Despacho</h3><p>Enviamos con número de seguimiento. Rastrea tu paquete en tiempo real.</p></div>
-    <div class="how-step"><div class="step-num">4</div><h3>En tu puerta</h3><p>3-5 días hábiles a cualquier ciudad de Colombia. Envío completamente gratis.</p></div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section class="bene-section">
-  <div class="bene-inner">
-    <div>
-      <div class="section-label">Por qué elegirlo</div>
-      <h2 class="section-title" style="text-align:left;margin-bottom:2rem;">Diseñado para hacer<br><em>tu vida más fácil</em></h2>
-      <div class="bene-list">
-        <div class="bene-card"><div class="bene-icon">🔘</div><div><div class="bene-title">Botón autolimpiante mágico</div><div class="bene-desc">Presiona el botón y el pelo acumulado cae solo. Sin tocar el pelo con tus manos.</div></div></div>
-        <div class="bene-card"><div class="bene-icon">🦾</div><div><div class="bene-title">Acero inoxidable duradero</div><div class="bene-desc">No se oxida, no se dobla. Cerdas que duran años con el mismo rendimiento.</div></div></div>
-        <div class="bene-card"><div class="bene-icon">📐</div><div><div class="bene-title">Agujas a 60° sin dolor</div><div class="bene-desc">Ángulo especial que atrapa el pelo sin lastimar la piel. Muchas mascotas lo piden ellas solas.</div></div></div>
-        <div class="bene-card"><div class="bene-icon">✋</div><div><div class="bene-title">Mango ergonómico</div><div class="bene-desc">Antideslizante, cómodo para sesiones largas. Se adapta perfectamente a tu mano.</div></div></div>
+<!-- PAIN SECTION -->
+<section style="background:var(--white);padding:0;">
+<div style="background:#EBEBEB;padding:2.5rem 1.5rem 2.5rem;">
+<div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.4rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:0.5rem;">El problema</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;">¿Cansado del pelo <em style="font-style:italic;color:var(--sage-deep);">acumulado?</em></h2>
+      <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:42ch;margin:0 auto;">El cepillado termina siendo más trabajo que solución.</p>
+    </div>
+    <div class="pain-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Pierdes tiempo limpiando el cepillo</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Tienes que quitar el pelo a mano después de cada sesión.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">El pelo se queda atrapado</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Los cepillos normales dejan de funcionar a los pocos minutos.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.15);border-left:3px solid var(--sage-deep);">
+          <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+          <div style="font-size:0.78rem;color:var(--ink);line-height:1.55;"><strong>La solución:</strong> un toque del botón y el pelo cae solo en segundos.</div>
+        </div>
       </div>
-    </div>
-    <div class="bene-visual">
-      <div class="bene-vis-item"><div class="bene-vis-num">30s</div><div class="bene-vis-label">Tiempo promedio de depilación completa</div></div>
-      <div class="bene-vis-item"><div class="bene-vis-num">486</div><div class="bene-vis-label">Clientes satisfechos · 4.9★ promedio</div></div>
-      <div class="bene-vis-item"><div class="bene-vis-num">0</div><div class="bene-vis-label">Veces que tendrás que tocar el pelo con las manos</div></div>
-      <div class="bene-vis-item"><div class="bene-vis-num">15d</div><div class="bene-vis-label">Garantía completa sin preguntas difíciles</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section class="rev-section" id="reviews">
-  <div class="rev-inner">
-    <div class="rev-header">
       <div>
-        <div class="section-label">Opiniones</div>
-        <h2 class="section-title" style="text-align:left;margin-bottom:0;">Lo que dicen nuestros <em>clientes</em></h2>
-      </div>
-      <div class="rev-avg">
-        <div class="rev-avg-num" id="avgScore">4.9</div>
-        <div class="rev-avg-stars">★★★★★</div>
-        <div class="rev-avg-sub" id="avgCount">486 reseñas</div>
+        <img src="cepillo3.png" alt="Depilación sencilla"
+             style="width:100%;height:auto;display:block;border-radius:4px;"
+             onerror="this.style.display='none'">
       </div>
     </div>
-    <div class="rev-grid" id="reviewsGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--mid);">Cargando reseñas...</div>
+  </div>
+</div>
+</section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
+<!-- PAIN SECTION 2 -->
+<section style="background:var(--white);padding:2.5rem 1.5rem;">
+<div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.4rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:0.5rem;">El problema</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;">¿Todo parece igual pero <em style="font-style:italic;color:var(--sage-deep);">nada funciona?</em></h2>
+      <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:42ch;margin:0 auto;">Compras tras compras y siempre terminas decepcionado.</p>
     </div>
-    <div class="rev-bottom">
-      <div><div style="font-family:'Fraunces',serif;font-size:0.95rem;font-weight:700;margin-bottom:0.2rem;">¿Ya compraste en petZen?</div><div style="font-size:0.8rem;color:var(--mid);">Comparte tu experiencia</div></div>
-      <button class="write-btn" onclick="openROV()">✍️ Escribir reseña</button>
+    <div class="pain-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Materiales incómodos</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Cerdas que rascan, mangos que resbalan, plásticos que se rompen.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Diseños poco prácticos</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Difíciles de limpiar, incómodos de usar, no duran nada.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.15);border-left:3px solid var(--sage-deep);">
+          <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+          <div style="font-size:0.78rem;color:var(--ink);line-height:1.55;"><strong>La diferencia:</strong> agujas de acero inoxidable a 60°, mango ergonómico antideslizante y botón autolimpiante. Diseñado para durar.</div>
+        </div>
+      </div>
+      <div>
+        <img src="cepillo4.png" alt="Diseño del cepillo"
+             style="width:100%;height:auto;display:block;border-radius:4px;"
+             onerror="this.style.display='none'">
+      </div>
     </div>
   </div>
 </section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
+<!-- PAIN SECTION 3 -->
+<section style="background:#EBEBEB;padding:2.5rem 1.5rem;">
+<div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.4rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--rose-deep);margin-bottom:0.5rem;">El problema</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;margin-bottom:0.5rem;">¿Compras algo y no termina siendo <em style="font-style:italic;color:var(--sage-deep);">cómodo?</em></h2>
+      <p style="font-size:0.85rem;color:var(--mid);line-height:1.6;max-width:42ch;margin:0 auto;">El tamaño y el diseño importan más de lo que crees.</p>
+    </div>
+    <div class="pain-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:0.65rem;">
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Muy grande o muy pequeño</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Un cepillo mal dimensionado cansa la mano y estresa a tu mascota.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Difícil de manejar</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Mangos lisos, formas incómodas — terminas soltándolo a los dos minutos.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(0,0,0,0.04);border-left:3px solid var(--rose-deep);">
+          <span style="color:var(--rose-deep);font-weight:800;flex-shrink:0;">✗</span>
+          <div>
+            <div style="font-weight:700;font-size:0.82rem;margin-bottom:0.1rem;">Terminas usándolo poco</div>
+            <div style="font-size:0.75rem;color:var(--mid);line-height:1.5;">Si no es cómodo, no lo usas. Y tu mascota lo nota.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;padding:0.75rem 0.9rem;background:rgba(123,174,138,0.15);border-left:3px solid var(--sage-deep);">
+          <span style="color:var(--sage-deep);font-weight:800;flex-shrink:0;">✓</span>
+          <div style="font-size:0.78rem;color:var(--ink);line-height:1.55;"><strong>El tamaño exacto:</strong> 10.4 cm de ancho × 19.3 cm de alto. Mango texturizado antideslizante diseñado para sostenerse sin esfuerzo, sesión tras sesión.</div>
+        </div>
+      </div>
+      <div>
+        <img src="cepillo5.png" alt="Medidas del cepillo PetZen"
+             style="width:100%;height:auto;display:block;border-radius:4px;"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-inner">
-    <div class="section-label" style="text-align:center;">Preguntas frecuentes</div>
-    <h2 class="section-title">Todo lo que necesitas <em>saber</em></h2>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Funciona para perros y gatos? <span class="icon">+</span></button><div class="faq-a">Sí, funciona con cualquier tipo de pelaje — corto, largo, liso o rizado, para perros y gatos de cualquier tamaño.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cuánto tarda el envío? <span class="icon">+</span></button><div class="faq-a">3-5 días hábiles a cualquier ciudad de Colombia. Envío gratis incluido. Recibirás número de seguimiento por email.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Las agujas lastiman a mi mascota? <span class="icon">+</span></button><div class="faq-a">No. Las agujas tienen puntas redondeadas a 60° que masajean suavemente sin causar dolor. Muchas mascotas lo disfrutan.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el botón autolimpiante? <span class="icon">+</span></button><div class="faq-a">Presiona el botón trasero y las cerdas se retraen, soltando todo el pelo instantáneamente sobre el basurero. Sin tocar el pelo.</div></div>
-    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si no quedo satisfecho? <span class="icon">+</span></button><div class="faq-a">15 días de garantía. Si no quedas satisfecho, reembolso completo o producto nuevo sin costo. Sin preguntas difíciles.</div></div>
+<!-- COMPARISON TABLE -->
+<section style="background:var(--white);padding:3.5rem 1.5rem;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:1.8rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:0.5rem;">¿Por qué elegirnos?</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;">petZen vs <em style="font-style:italic;color:var(--mid);">el resto</em></h2>
+    </div>
+
+    <div style="border:1px solid var(--border);overflow:hidden;background:white;">
+
+      <!-- Header -->
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--ink);">
+        <div style="padding:0.9rem 1rem;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);">Característica</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid rgba(255,255,255,0.1);background:rgba(123,174,138,0.15);">
+          <div style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:white;">pet<span style="color:#A8D5B5;">Zen</span></div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.5);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.15rem;">Nuestra marca</div>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid rgba(255,255,255,0.1);">
+          <div style="font-size:0.9rem;font-weight:700;color:rgba(255,255,255,0.4);">Otros</div>
+          <div style="font-size:0.6rem;color:rgba(255,255,255,0.25);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.15rem;">La competencia</div>
+        </div>
+      </div>
+
+      <!-- Rows -->
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Botón autolimpiante</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Agujas acero inoxidable</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Puntas redondeadas 60°</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Mango ergonómico antideslizante</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Tamaño ideal (10.4 × 19.3 cm)</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:0.75rem;color:var(--mid);font-weight:600;">Varía</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Envío gratis a Colombia</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);background:rgba(123,174,138,0.03);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Garantía 15 días</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--border);">
+        <div style="padding:0.9rem 1rem;font-size:0.82rem;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">Soporte en Colombia</div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:rgba(123,174,138,0.06);">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(123,174,138,0.2);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--sage-deep);font-weight:800;">✓</span>
+        </div>
+        <div style="padding:0.9rem 1rem;text-align:center;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;">
+          <span style="width:28px;height:28px;border-radius:50%;background:rgba(201,107,107,0.1);display:inline-flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--rose-deep);font-weight:800;">✗</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
+<!-- PHOTO TESTIMONIALS -->
+<section style="background:var(--off);padding:4rem 1.5rem;">
+  <div style="max-width:960px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:0.5rem;">Clientes reales · Fotos reales</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;">Ellos ya lo <em style="font-style:italic;color:var(--sage-deep);">comprobaron</em></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;">
+
+      <!-- 1 — cepillando gato negro/blanco en cama -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato1.png" alt="Cliente cepillando su gato" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Mi gato se deja cepillar por primera vez. Las puntas redondeadas lo relajan en vez de asustarlo. ¡Increíble!"</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">SM</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Sara M.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Bogotá · gato doméstico</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — cepillando en el piso -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato2.png" alt="Sesión de cepillado en el piso" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Se queda tumbado y no se mueve. Antes huía apenas veía el cepillo. Ahora lo espera quieto."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">JP</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Juan P.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Medellín · 2 gatos en casa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — cepillo con pelo recogido, gato negro al fondo -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato3.png" alt="Resultado después de cepillar" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Una sola pasada y ya el cepillo recoge así. No puedo creer cuánto pelo suelto tenía mi gato encima."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">LG</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Lorena G.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Cali · gato negro pelo corto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — cepillo lleno de pelo -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato4.png" alt="Cepillo lleno de pelo recogido" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Todo ese pelo estaba en mi sofá. Ahora queda en el cepillo y lo boto con un clic. Mi casa cambió completamente."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#1565C0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">AM</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Alejandra M.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Barranquilla · gato persa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — botón limpiador, vista trasera -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato5.png" alt="Botón autolimpiante del cepillo" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El botón del frente expulsa todo el pelo sin ensuciarte. Es lo más práctico que he comprado para mis mascotas."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#6B4F9E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">CR</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Camila R.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Pereira · gato y perro</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 — cepillo lleno, fondo madera -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato6.png" alt="Resultado visible tras cepillar" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Eso es de una sola sesión. Mi gata tiene pelo largo y antes yo terminaba con pelo en toda la ropa. Ya no más."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#4A8C5C;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">DV</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Diana V.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Bucaramanga · gata angora</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 — mango texturizado en mano -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato7.png" alt="Mango ergonómico antideslizante" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El mango no resbala nada. Cepillo a mi gata 10 minutos seguidos y la mano no se cansa. El diseño es muy bueno."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">MO</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">María O.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Manizales · gata siamesa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 — cepillo lleno de pelo, al aire libre -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato8.png" alt="Cepillo usado al aire libre" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Lo uso en el patio para que el pelo vuele lejos. Funciona igual de bien afuera. Muy resistente y fácil de limpiar."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">FH</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Felipe H.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Armenia · perro y gato</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9 — agujas de acero closeup -->
+      <div style="background:white;border:1px solid var(--border);overflow:hidden;">
+        <div style="height:220px;overflow:hidden;">
+          <img src="gato9.png" alt="Agujas de acero inoxidable de cerca" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div style="padding:1.1rem;">
+          <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
+          <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Las puntas redondeadas son reales, no publicidad. Mi gato no se queja nada. Calidad muy superior a los que había probado antes."</p>
+          <div style="display:flex;align-items:center;gap:0.6rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">NT</div>
+            <div>
+              <div style="font-weight:700;font-size:0.78rem;">Natalia T.</div>
+              <div style="font-size:0.68rem;color:var(--mid);">Cúcuta · gato pelo corto</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🚚</span><span>Envío gratis a todo Colombia</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🏷️</span><span>Descuento 32% OFF hoy</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>↩️</span><span>Garantía 15 días sin preguntas</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>⚡</span><span>Solo quedan pocas unidades</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>🔒</span><span>Pago 100% seguro · Wompi · PSE</span><span class="ticker-sep">◆</span></span><span class="ticker-item"><span>★</span><span>4.9 estrellas · +486 reseñas</span><span class="ticker-sep">◆</span></span></div></div>
 
 <!-- BOTTOM CTA -->
 <section class="bottom-cta">
@@ -520,6 +1036,24 @@ async function submitReview(){
   b.disabled=false;b.textContent='Publicar reseña';
 }
 // Scroll animations
+// Quantity
+var qty = 1;
+function changeQty(d) {
+  qty = Math.max(1, Math.min(10, qty + d));
+  document.getElementById('qtyNum').textContent = qty;
+}
+
+// Accordion
+function toggleAcc(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.acc-trigger').forEach(b => b.classList.remove('open'));
+  // Open clicked if it was closed
+  if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+}
+
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';obs.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.how-step,.bene-card,.rev-card,.bene-vis-item,.proof-item').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.55s ease, transform 0.55s ease';obs.observe(el);});
 </script>
