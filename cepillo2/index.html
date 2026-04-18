@@ -164,8 +164,8 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97)
 .rev-text { font-size: 0.85rem; color: var(--mid); line-height: 1.75; font-style: italic; margin-bottom: 1rem; }
 .rev-author { display: flex; align-items: center; gap: 0.7rem; }
 .rev-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.78rem; color: white; flex-shrink: 0; }
-.rev-name { font-weight: 700; font-size: 0.82rem; }
-.rev-city { font-size: 0.68rem; color: var(--mid); }
+.rev-name { font-weight: 700; font-size: 0.82rem; word-break: break-word; }
+.rev-city { font-size: 0.68rem; color: var(--mid); word-break: break-word; }
 .rev-bottom { display: flex; align-items: center; justify-content: space-between; background: white; border: 1px solid var(--border); padding: 1.2rem 1.5rem; }
 .write-btn { background: var(--ink); color: white; border: none; padding: 0.75rem 1.6rem; font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; transition: background 0.2s; }
 .write-btn:hover { background: var(--sage-deep); }
@@ -297,6 +297,9 @@ footer a:hover { color: #A8D5B5; }
   .how-section, .bene-section, .rev-section, .faq-section, .bottom-cta { padding: 3rem 1.5rem; }
   .testimonials-grid { grid-template-columns: 1fr !important; }
   .pain-grid { grid-template-columns: 1fr !important; }
+  .photo-test-grid { grid-template-columns: 1fr !important; }
+  .rev-name { white-space: normal; word-break: break-word; }
+  .rev-city { white-space: normal; word-break: break-word; }
   nav { padding: 0.8rem 1.2rem; }
   footer { flex-direction: column; text-align: center; padding: 1.5rem; }
 }
@@ -727,7 +730,7 @@ footer a:hover { color: #A8D5B5; }
       <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-weight:700;line-height:1.2;">Ellos ya lo <em style="font-style:italic;color:var(--sage-deep);">comprobaron</em></h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;" class="photo-test-grid">
 
       <!-- 1 — cepillando gato negro/blanco en cama -->
       <div style="background:white;border:1px solid var(--border);overflow:hidden;">
@@ -737,7 +740,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Mi gato se deja cepillar por primera vez. Las puntas redondeadas lo relajan en vez de asustarlo. ¡Increíble!"</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">SM</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Sara M.</div>
@@ -755,7 +758,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Se queda tumbado y no se mueve. Antes huía apenas veía el cepillo. Ahora lo espera quieto."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">JP</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Juan P.</div>
@@ -773,7 +776,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Una sola pasada y ya el cepillo recoge así. No puedo creer cuánto pelo suelto tenía mi gato encima."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">LG</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Lorena G.</div>
@@ -791,7 +794,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Todo ese pelo estaba en mi sofá. Ahora queda en el cepillo y lo boto con un clic. Mi casa cambió completamente."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#1565C0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">AM</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Alejandra M.</div>
@@ -809,7 +812,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El botón del frente expulsa todo el pelo sin ensuciarte. Es lo más práctico que he comprado para mis mascotas."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#6B4F9E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">CR</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Camila R.</div>
@@ -827,7 +830,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Eso es de una sola sesión. Mi gata tiene pelo largo y antes yo terminaba con pelo en toda la ropa. Ya no más."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#4A8C5C;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">DV</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Diana V.</div>
@@ -845,7 +848,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"El mango no resbala nada. Cepillo a mi gata 10 minutos seguidos y la mano no se cansa. El diseño es muy bueno."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#C8A96E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">MO</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">María O.</div>
@@ -863,7 +866,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Lo uso en el patio para que el pelo vuele lejos. Funciona igual de bien afuera. Muy resistente y fácil de limpiar."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#7BAE8A;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">FH</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Felipe H.</div>
@@ -881,7 +884,7 @@ footer a:hover { color: #A8D5B5; }
         <div style="padding:1.1rem;">
           <div style="color:#F59E0B;font-size:0.8rem;margin-bottom:0.5rem;">★★★★★</div>
           <p style="font-size:0.82rem;color:var(--mid);line-height:1.7;font-style:italic;margin-bottom:0.9rem;">"Las puntas redondeadas son reales, no publicidad. Mi gato no se queja nada. Calidad muy superior a los que había probado antes."</p>
-          <div style="display:flex;align-items:center;gap:0.6rem;">
+          <div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">
             <div style="width:32px;height:32px;border-radius:50%;background:#C94040;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.7rem;color:white;flex-shrink:0;">NT</div>
             <div>
               <div style="font-weight:700;font-size:0.78rem;">Natalia T.</div>
