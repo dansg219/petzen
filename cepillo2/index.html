@@ -69,8 +69,8 @@ nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97)
 .color-dot:hover, .color-dot.active { border-color: var(--ink); transform: scale(1.15); }
 .color-label { font-size: 0.72rem; font-weight: 600; color: var(--mid); margin-left: 0.4rem; }
 .thumbs-row { display: flex; gap: 0.5rem; margin-top: 1.2rem; }
-.thumb { width: 56px; height: 56px; object-fit: cover; border: 2px solid transparent; cursor: pointer; opacity: 0.55; transition: all 0.2s; background: white; }
-.thumb:hover, .thumb.active { border-color: var(--sage-deep); opacity: 1; }
+.thumb { width: 56px; height: 56px; object-fit: cover; border: none; cursor: pointer; opacity: 0.55; transition: all 0.2s; background: transparent; }
+.thumb:hover, .thumb.active { border: none; outline: 2px solid var(--sage-deep); outline-offset: 1px; opacity: 1; }
 .badge-sale { position: absolute; top: 1.5rem; left: 1.5rem; background: var(--red); color: white; padding: 0.5rem 0.8rem; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 
 /* RIGHT — info */
@@ -320,14 +320,6 @@ footer a:hover { color: #A8D5B5; }
     <div class="badge-sale" style="z-index:10;">OFERTA 32% OFF</div>
     <img id="mainImg" class="hero-img" src="../petZen Images/Hair removal pet brush/cepillo 1.png" alt="Cepillo Depilador" onerror="this.src='../cepillo_1.png'">
     <div style="position:absolute;bottom:0;left:0;right:0;z-index:10;background:linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 50%, transparent 100%);padding:1.5rem 2rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
-    <div class="color-strip" style="margin-top:0;">
-      <span style="font-size:0.72rem;font-weight:600;color:var(--mid);">Color:</span>
-      <div class="color-dot active" style="background:#9CA3AF;" title="Gris" onclick="selectColor(this,'Gris')"></div>
-      <div class="color-dot" style="background:#F9A8D4;" title="Rosa" onclick="selectColor(this,'Rosa')"></div>
-      <div class="color-dot" style="background:#6EE7B7;" title="Verde" onclick="selectColor(this,'Verde')"></div>
-      <div class="color-dot" style="background:#93C5FD;" title="Azul" onclick="selectColor(this,'Azul')"></div>
-      <span class="color-label" id="colorLabel">Gris</span>
-    </div>
     <div class="thumbs-row" id="thumbsRow">
       <img src="../petZen Images/Hair removal pet brush/cepillo 1.png" class="thumb active" onclick="setImg(this)" onerror="this.style.display='none'">
       <img src="../petZen Images/Hair removal pet brush/cepillo 2.png" class="thumb" onclick="setImg(this)" onerror="this.style.display='none'">
